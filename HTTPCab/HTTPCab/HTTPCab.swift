@@ -20,47 +20,17 @@ public enum HTTPMethod: String {
     case options = "OPTIONS"
 }
 
-struct ResponseResult {
-    let statusCode: Int
-    let data: Data?
+public func request(_ url: URL, method: HTTPMethod = .get,
+                  parameters: Parameters? = nil,
+                  headers: HTTPHeaders? = nil,
+                  parametersEncoding: ParametersEncoding = URLEncoding.default,
+                  completion: @escaping (ResponseStatus) -> ()) {
+    return HTTPManager.default.request(url, method: method, parameters: parameters, headers: headers, parametersEncoding: parametersEncoding, completion: completion)
 }
 
-enum ResponseStatus {
+public enum ResponseStatus {
     case success(value: ResponseResult)
     case failure(error: Error)
-}
-
-open class HTTPManager {
-    
-    open static let `default`: HTTPManager = {
-        return HTTPManager(urlSessionConfiguration: URLSessionConfiguration.default)
-    }()
-    
-    var session: URLSession
-    var delegate: SessionDelegate
-    
-    init(urlSessionConfiguration: URLSessionConfiguration = .default, sessionDelegate: SessionDelegate = SessionDelegate()) {
-        self.session = URLSession(configuration: urlSessionConfiguration, delegate: sessionDelegate, delegateQueue: nil)
-        self.delegate = sessionDelegate
-    }
-    
-    open func request(_ url: URL, method: HTTPMethod = .get,
-                      parameters: Parameters? = nil,
-                      headers: HTTPHeaders? = nil,
-                      parametersEncoding: ParametersEncoding = URLEncoding.default) {
-        
-        var originalRequest: URLRequest?
-        do {
-            originalRequest = URLRequest(url: url, method: method, headers: headers)
-            let encodedUrlRequest = try parametersEncoding.encodeUrlRequest(originalRequest!, withParameters: parameters)
-//            session.dataTask(with: <#T##URL#>, completionHandler: <#T##(Data?, URLResponse?, Error?) -> Void#>)
-        } catch {
-            
-        }
-        
-    }
-    
-    
 }
 
 open class SessionDelegate: NSObject, URLSessionTaskDelegate {

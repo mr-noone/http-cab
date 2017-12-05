@@ -13,7 +13,14 @@ public enum ParametersEncodingError {
     case jsonSerializationError(error: Error)
 }
 
+public enum ResponseError: Error {
+    case noData
+    case jsonSerializationError(error: Error)
+    case invalidHTTPResponse
+}
+
 public enum HTTPCabError: Error {
     case invalidUrl(url: URL)
     case parametersEncodingError(error: ParametersEncodingError)
+    case responseError(error: ResponseError)
 }
