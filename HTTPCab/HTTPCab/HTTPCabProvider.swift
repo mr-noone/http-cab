@@ -8,11 +8,8 @@
 
 import Foundation
 
-public protocol HTTPCabProviderType {
-    associatedtype TaskType: RequestableType
-}
 
-public class HTTPCabProvider<T: RequestableType>: HTTPCabProviderType {
+public class HTTPCabProvider<T: RequestableType> {
     func request(_ target: T) {
         
     }
