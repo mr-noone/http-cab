@@ -8,7 +8,7 @@
 
 import Foundation
 
-public enum HTTPMethod: String {
+public enum Method: String {
     case get     = "GET"
     case post    = "POST"
     case head    = "HEAD"
@@ -20,16 +20,17 @@ public enum HTTPMethod: String {
     case options = "OPTIONS"
 }
 
-public func request(_ url: URL, method: HTTPMethod = .get,
+@discardableResult
+public func request(_ url: URL, method: Method = .get,
                   parameters: Parameters? = nil,
                   headers: HTTPHeaders? = nil,
                   parametersEncoding: ParametersEncoding = URLEncoding.default,
-                  completion: @escaping (ResponseStatus) -> ()) {
-    return HTTPManager.default.request(url, method: method, parameters: parameters, headers: headers, parametersEncoding: parametersEncoding, completion: completion)
+                  completion: @escaping (ResponseStatus) -> ()) -> URLSessionDataTask? {
+    return RequestManager.default.request(url, method: method, parameters: parameters, headers: headers, parametersEncoding: parametersEncoding, completion: completion)
 }
 
 public enum ResponseStatus {
-    case success(value: ResponseResult)
+    case success(value: RequestResult)
     case failure(error: Error)
 }
 
@@ -38,7 +39,7 @@ open class SessionDelegate: NSObject, URLSessionTaskDelegate {
 }
 
 extension URLRequest {
-    public init(url: URL, method: HTTPMethod, headers: HTTPHeaders? = nil) {
+    public init(url: URL, method: Method, headers: HTTPHeaders? = nil) {
         self.init(url: url)
         
         httpMethod = method.rawValue

@@ -11,6 +11,7 @@ import Foundation
 public enum ParametersEncodingError {
     case noUrl
     case jsonSerializationError(error: Error)
+    case pListEncodingError(error: Error)
 }
 
 public enum ResponseError: Error {
@@ -19,8 +20,14 @@ public enum ResponseError: Error {
     case invalidHTTPResponse
 }
 
+public enum MappingError: Error {
+    case requestMapping(String)
+    case encodableMapping
+}
+
 public enum HTTPCabError: Error {
     case invalidUrl(url: URL)
+    case mappingError(error: MappingError)
     case parametersEncodingError(error: ParametersEncodingError)
     case responseError(error: ResponseError)
 }

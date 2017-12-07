@@ -15,6 +15,7 @@ private enum StandardHeaderFieldKey: String {
 private enum EncodingHeaderValue: String {
     case urlEncoding = "application/x-www-form-urlencoded; charset=utf-8"
     case jsonEncoding = "application/json"
+    case plistEncoding = "application/x-plist"
 }
 
 public protocol ParametersEncoding {
@@ -34,13 +35,11 @@ public struct URLEncoding: ParametersEncoding {
             return urlRequest
         }
         
-        if urlRequest.value(forHTTPHeaderField: StandardHeaderFieldKey.contentType.rawValue) == nil {
-            urlRequest.setValue(EncodingHeaderValue.urlEncoding.rawValue, forHTTPHeaderField: StandardHeaderFieldKey.contentType.rawValue)
-        }
-        
         var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false)
         urlComponents?.queryItems = params.map { URLQueryItem(name: "\($0.key)", value: "\($0.value)") }
         urlRequest.url = urlComponents?.url
+        
+        urlRequest.setValueForHeaderFieldIfNotConsist(StandardHeaderFieldKey.contentType.rawValue, value: EncodingHeaderValue.urlEncoding.rawValue)
         
         return urlRequest
     }
@@ -58,13 +57,60 @@ public struct JSONEncoding: ParametersEncoding {
             let data = try JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)
             urlRequest.httpBody = data
             
-            if urlRequest.value(forHTTPHeaderField: StandardHeaderFieldKey.contentType.rawValue) == nil {
-                urlRequest.setValue(EncodingHeaderValue.jsonEncoding.rawValue, forHTTPHeaderField: StandardHeaderFieldKey.contentType.rawValue)
-            }
+            urlRequest.setValueForHeaderFieldIfNotConsist(StandardHeaderFieldKey.contentType.rawValue, value: EncodingHeaderValue.jsonEncoding.rawValue)
         } catch {
             throw HTTPCabError.parametersEncodingError(error: .jsonSerializationError(error: error))
         }
         
         return urlRequest
+    }
+}
+
+public struct PlistEncoding: ParametersEncoding {
+    
+    public static var xmlFormat: PlistEncoding {
+        return PlistEncoding(pListFormat: .xml)
+    }
+    
+    public static var binaryFormat: PlistEncoding {
+        return PlistEncoding(pListFormat: .binary)
+    }
+    
+    public static var openStepFormat: PlistEncoding {
+        return PlistEncoding(pListFormat: .openStep)
+    }
+    
+    public let pListFormat: PropertyListSerialization.PropertyListFormat
+    public let writeOptions: PropertyListSerialization.WriteOptions
+    
+    
+    public init(pListFormat: PropertyListSerialization.PropertyListFormat, writeOptions: PropertyListSerialization.WriteOptions = 0) {
+        self.pListFormat = pListFormat
+        self.writeOptions = writeOptions
+    }
+    
+    public func encodeUrlRequest(_ urlRequest: URLRequest, withParameters parameters: Parameters?) throws -> URLRequest {
+        var urlRequest = urlRequest
+
+        guard let params = parameters else { return urlRequest }
+        
+        do {
+            let data = try PropertyListSerialization.data(fromPropertyList: params, format: pListFormat, options: writeOptions)
+            
+            urlRequest.httpBody = data
+            urlRequest.setValueForHeaderFieldIfNotConsist(StandardHeaderFieldKey.contentType.rawValue, value: EncodingHeaderValue.plistEncoding.rawValue)
+        } catch {
+            throw HTTPCabError.parametersEncodingError(error: .pListEncodingError(error: error))
+        }
+        
+        return urlRequest
+    }
+}
+
+private extension URLRequest {
+    mutating func setValueForHeaderFieldIfNotConsist(_ headerField: String, value: String) {
+        if self.value(forHTTPHeaderField: headerField) == nil {
+            self.setValue(value, forHTTPHeaderField: headerField)
+        }
     }
 }
