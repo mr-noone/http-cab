@@ -14,7 +14,7 @@ public typealias Parameters = [String: Any]
 public protocol RequestableType {
     var baseURL: URL { get }
     var path: String { get }
-    var method: HTTPMethod { get }
+    var method: Method { get }
     var taskType: TaskType { get }
     var headers: HTTPHeaders? { get }
 }

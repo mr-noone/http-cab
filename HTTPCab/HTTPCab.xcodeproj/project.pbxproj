@@ -13,7 +13,11 @@
 		600311811FD6801100D5C36B /* HTTPCabError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600311801FD6801100D5C36B /* HTTPCabError.swift */; };
 		600311831FD6811500D5C36B /* RequestableType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600311821FD6811500D5C36B /* RequestableType.swift */; };
 		600311851FD6842F00D5C36B /* Encoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600311841FD6842F00D5C36B /* Encoding.swift */; };
-		600311871FD68CEA00D5C36B /* HTTPCabProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600311861FD68CEA00D5C36B /* HTTPCabProvider.swift */; };
+		600311871FD68CEA00D5C36B /* ApiProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600311861FD68CEA00D5C36B /* ApiProvider.swift */; };
+		6039A6941FD6E573002F04D1 /* RequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6039A6931FD6E573002F04D1 /* RequestManager.swift */; };
+		606EEFD51FD9371C0059B4EE /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 606EEFD41FD9371C0059B4EE /* Endpoint.swift */; };
+		606EEFD71FD937550059B4EE /* AnyEncodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 606EEFD61FD937550059B4EE /* AnyEncodable.swift */; };
+		60B562AD1FD812C60043B8D1 /* RequestResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B562AC1FD812C60043B8D1 /* RequestResult.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,7 +40,11 @@
 		600311801FD6801100D5C36B /* HTTPCabError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPCabError.swift; sourceTree = "<group>"; };
 		600311821FD6811500D5C36B /* RequestableType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestableType.swift; sourceTree = "<group>"; };
 		600311841FD6842F00D5C36B /* Encoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Encoding.swift; sourceTree = "<group>"; };
-		600311861FD68CEA00D5C36B /* HTTPCabProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPCabProvider.swift; sourceTree = "<group>"; };
+		600311861FD68CEA00D5C36B /* ApiProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiProvider.swift; sourceTree = "<group>"; };
+		6039A6931FD6E573002F04D1 /* RequestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestManager.swift; sourceTree = "<group>"; };
+		606EEFD41FD9371C0059B4EE /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
+		606EEFD61FD937550059B4EE /* AnyEncodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyEncodable.swift; sourceTree = "<group>"; };
+		60B562AC1FD812C60043B8D1 /* RequestResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestResult.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,8 +92,12 @@
 				6003117E1FD67F1200D5C36B /* HTTPCab.swift */,
 				600311801FD6801100D5C36B /* HTTPCabError.swift */,
 				600311821FD6811500D5C36B /* RequestableType.swift */,
+				600311861FD68CEA00D5C36B /* ApiProvider.swift */,
+				606EEFD61FD937550059B4EE /* AnyEncodable.swift */,
+				606EEFD41FD9371C0059B4EE /* Endpoint.swift */,
 				600311841FD6842F00D5C36B /* Encoding.swift */,
-				600311861FD68CEA00D5C36B /* HTTPCabProvider.swift */,
+				6039A6931FD6E573002F04D1 /* RequestManager.swift */,
+				60B562AC1FD812C60043B8D1 /* RequestResult.swift */,
 			);
 			path = HTTPCab;
 			sourceTree = "<group>";
@@ -227,8 +239,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				600311851FD6842F00D5C36B /* Encoding.swift in Sources */,
+				606EEFD51FD9371C0059B4EE /* Endpoint.swift in Sources */,
+				6039A6941FD6E573002F04D1 /* RequestManager.swift in Sources */,
+				60B562AD1FD812C60043B8D1 /* RequestResult.swift in Sources */,
 				600311831FD6811500D5C36B /* RequestableType.swift in Sources */,
-				600311871FD68CEA00D5C36B /* HTTPCabProvider.swift in Sources */,
+				600311871FD68CEA00D5C36B /* ApiProvider.swift in Sources */,
+				606EEFD71FD937550059B4EE /* AnyEncodable.swift in Sources */,
 				6003117F1FD67F1200D5C36B /* HTTPCab.swift in Sources */,
 				600311811FD6801100D5C36B /* HTTPCabError.swift in Sources */,
 			);

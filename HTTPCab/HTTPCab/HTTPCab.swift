@@ -8,7 +8,7 @@
 
 import Foundation
 
-public enum HTTPMethod: String {
+public enum Method: String {
     case get     = "GET"
     case post    = "POST"
     case head    = "HEAD"
@@ -20,47 +20,20 @@ public enum HTTPMethod: String {
     case options = "OPTIONS"
 }
 
-struct ResponseResult {
-    let statusCode: Int
-    let data: Data?
+public typealias RequestStatusCompletion = (RequestStatus) -> ()
+
+@discardableResult
+public func request(_ url: URL, method: Method = .get,
+                  parameters: Parameters? = nil,
+                  headers: HTTPHeaders? = nil,
+                  parametersEncoding: ParametersEncoding = URLEncoding.default,
+                  completion: @escaping RequestStatusCompletion) -> URLSessionDataTask? {
+    return RequestManager.default.request(url, method: method, parameters: parameters, headers: headers, parametersEncoding: parametersEncoding, completion: completion)
 }
 
-enum ResponseStatus {
-    case success(value: ResponseResult)
+public enum RequestStatus {
+    case success(value: RequestResult)
     case failure(error: Error)
-}
-
-open class HTTPManager {
-    
-    open static let `default`: HTTPManager = {
-        return HTTPManager(urlSessionConfiguration: URLSessionConfiguration.default)
-    }()
-    
-    var session: URLSession
-    var delegate: SessionDelegate
-    
-    init(urlSessionConfiguration: URLSessionConfiguration = .default, sessionDelegate: SessionDelegate = SessionDelegate()) {
-        self.session = URLSession(configuration: urlSessionConfiguration, delegate: sessionDelegate, delegateQueue: nil)
-        self.delegate = sessionDelegate
-    }
-    
-    open func request(_ url: URL, method: HTTPMethod = .get,
-                      parameters: Parameters? = nil,
-                      headers: HTTPHeaders? = nil,
-                      parametersEncoding: ParametersEncoding = URLEncoding.default) {
-        
-        var originalRequest: URLRequest?
-        do {
-            originalRequest = URLRequest(url: url, method: method, headers: headers)
-            let encodedUrlRequest = try parametersEncoding.encodeUrlRequest(originalRequest!, withParameters: parameters)
-//            session.dataTask(with: <#T##URL#>, completionHandler: <#T##(Data?, URLResponse?, Error?) -> Void#>)
-        } catch {
-            
-        }
-        
-    }
-    
-    
 }
 
 open class SessionDelegate: NSObject, URLSessionTaskDelegate {
@@ -68,7 +41,7 @@ open class SessionDelegate: NSObject, URLSessionTaskDelegate {
 }
 
 extension URLRequest {
-    public init(url: URL, method: HTTPMethod, headers: HTTPHeaders? = nil) {
+    public init(url: URL, method: Method, headers: HTTPHeaders? = nil) {
         self.init(url: url)
         
         httpMethod = method.rawValue
