@@ -1,5 +1,5 @@
 //
-//  Request.swift
+//  Task.swift
 //  HTTPCab
 //
 //  Created by Igor Voytovich on 12/7/17.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-open class Request<T> {
+open class Task<T> {
     open let url: String
     open let method: Method
     open let taskType: TaskType
@@ -22,7 +22,7 @@ open class Request<T> {
     }
 }
 
-extension Request {
+extension Task {
     public func urlRequest() throws -> URLRequest {
         guard let requestUrl = URL(string: url) else {
             throw HTTPCabError.mappingError(error: .requestMapping(url))

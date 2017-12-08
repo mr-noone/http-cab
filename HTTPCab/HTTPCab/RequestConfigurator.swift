@@ -18,9 +18,9 @@ public class RequestConfigurator<T: ProviderConfiguration> {
     
     @discardableResult
     public func request(_ configuration: T, completion: @escaping RequestStatusCompletion) -> URLSessionDataTask? {
-        let endpoint = defaultRequestForConfiguration(configuration)
+        let task = defaultTaskForConfiguration(configuration)
         do {
-            let urlRequest = try endpoint.urlRequest()
+            let urlRequest = try task.urlRequest()
             return standartRequest(urlRequest: urlRequest, completion: completion)
         } catch {
             return nil
@@ -33,8 +33,8 @@ public class RequestConfigurator<T: ProviderConfiguration> {
 }
 
 public extension RequestConfigurator {
-    private final func defaultRequestForConfiguration(_ configuration: T) -> Request<T> {
-        return Request(url: URL(configuration: configuration).absoluteString
+    private final func defaultTaskForConfiguration(_ configuration: T) -> Task<T> {
+        return Task(url: URL(configuration: configuration).absoluteString
             , method: configuration.method, taskType: configuration.taskType, headers: configuration.headers)
     }
 }
