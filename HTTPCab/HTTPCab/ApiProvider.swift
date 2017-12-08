@@ -44,7 +44,7 @@ public class ApiProvider<T: ProviderConfiguration> {
 }
 
 public extension ApiProvider {
-    public final func defaultEndpointForTarget(_ target: T) -> Endpoint<T> {
+    private final func defaultEndpointForTarget(_ target: T) -> Endpoint<T> {
         return Endpoint(url: URL(requestable: target).absoluteString
             , method: target.method, taskType: target.taskType, headers: target.headers)
     }
