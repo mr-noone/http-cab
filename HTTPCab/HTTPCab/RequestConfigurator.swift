@@ -17,8 +17,8 @@ public class RequestConfigurator<T: ProviderConfiguration> {
     }
     
     @discardableResult
-    public func request(_ target: T, completion: @escaping RequestStatusCompletion) -> URLSessionDataTask? {
-        let endpoint = defaultEndpointForTarget(target)
+    public func request(_ configuration: T, completion: @escaping RequestStatusCompletion) -> URLSessionDataTask? {
+        let endpoint = defaultRequestForConfiguration(configuration)
         do {
             let urlRequest = try endpoint.urlRequest()
             return standartRequest(urlRequest: urlRequest, completion: completion)
@@ -33,18 +33,18 @@ public class RequestConfigurator<T: ProviderConfiguration> {
 }
 
 public extension RequestConfigurator {
-    private final func defaultEndpointForTarget(_ target: T) -> Endpoint<T> {
-        return Endpoint(url: URL(requestable: target).absoluteString
-            , method: target.method, taskType: target.taskType, headers: target.headers)
+    private final func defaultRequestForConfiguration(_ configuration: T) -> Request<T> {
+        return Request(url: URL(configuration: configuration).absoluteString
+            , method: configuration.method, taskType: configuration.taskType, headers: configuration.headers)
     }
 }
 
 public extension URL {
-    init<T: ProviderConfiguration>(requestable: T) {
-        if requestable.path.isEmpty {
-            self = requestable.baseURL
+    init<T: ProviderConfiguration>(configuration: T) {
+        if configuration.path.isEmpty {
+            self = configuration.baseURL
         } else {
-            self = requestable.baseURL.appendingPathComponent(requestable.path)
+            self = configuration.baseURL.appendingPathComponent(configuration.path)
         }
     }
 }
@@ -56,7 +56,7 @@ extension URLRequest {
     
     mutating func encodeWithEncodable(_ encodable: Encodable) throws -> URLRequest {
         do {
-            let obj = AnyEncodableObject(encodable)
+            let obj = AnyEncodable(encodable)
             httpBody = try JSONEncoder().encode(obj)
             return self
         } catch {
