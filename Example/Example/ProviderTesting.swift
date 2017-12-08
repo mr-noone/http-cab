@@ -13,7 +13,7 @@ enum Requests {
     case getPosts
 }
 
-extension Requests: RequestableType {
+extension Requests: ProviderConfiguration {
     var baseURL: URL {
         return URL(string: "http://localhost:3000/")!
     }

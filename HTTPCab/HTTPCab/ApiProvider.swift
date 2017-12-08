@@ -9,7 +9,7 @@
 import Foundation
 
 public protocol NetworkService {
-    associatedtype ApiProviderType: RequestableType
+    associatedtype ApiProviderType: ProviderConfiguration
     var provider: ApiProvider<ApiProviderType> { get }
 }
 
@@ -19,7 +19,7 @@ public extension NetworkService {
     }
 }
 
-public class ApiProvider<T: RequestableType> {
+public class ApiProvider<T: ProviderConfiguration> {
     
     let requestManager: RequestManager
     
@@ -51,7 +51,7 @@ public extension ApiProvider {
 }
 
 public extension URL {
-    init<T: RequestableType>(requestable: T) {
+    init<T: ProviderConfiguration>(requestable: T) {
         if requestable.path.isEmpty {
             self = requestable.baseURL
         } else {

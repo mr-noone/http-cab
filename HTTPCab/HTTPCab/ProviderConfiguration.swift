@@ -1,5 +1,5 @@
 //
-//  RequestableType.swift
+//  ProviderConfiguration.swift
 //  HTTPCab
 //
 //  Created by Igor Voytovich on 12/5/17.
@@ -11,7 +11,7 @@ import Foundation
 public typealias HTTPHeaders = [String: String]
 public typealias Parameters = [String: Any]
 
-public protocol RequestableType {
+public protocol ProviderConfiguration {
     var baseURL: URL { get }
     var path: String { get }
     var method: Method { get }

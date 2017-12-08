@@ -11,7 +11,7 @@
 		1DDC45691FD194FE00F21A57 /* HTTPCab.h in Headers */ = {isa = PBXBuildFile; fileRef = 1DDC455B1FD194FE00F21A57 /* HTTPCab.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6003117F1FD67F1200D5C36B /* HTTPCab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6003117E1FD67F1200D5C36B /* HTTPCab.swift */; };
 		600311811FD6801100D5C36B /* HTTPCabError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600311801FD6801100D5C36B /* HTTPCabError.swift */; };
-		600311831FD6811500D5C36B /* RequestableType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600311821FD6811500D5C36B /* RequestableType.swift */; };
+		600311831FD6811500D5C36B /* ProviderConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600311821FD6811500D5C36B /* ProviderConfiguration.swift */; };
 		600311851FD6842F00D5C36B /* Encoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600311841FD6842F00D5C36B /* Encoding.swift */; };
 		600311871FD68CEA00D5C36B /* ApiProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600311861FD68CEA00D5C36B /* ApiProvider.swift */; };
 		6039A6941FD6E573002F04D1 /* RequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6039A6931FD6E573002F04D1 /* RequestManager.swift */; };
@@ -38,7 +38,7 @@
 		1DDC45681FD194FE00F21A57 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6003117E1FD67F1200D5C36B /* HTTPCab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPCab.swift; sourceTree = "<group>"; };
 		600311801FD6801100D5C36B /* HTTPCabError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPCabError.swift; sourceTree = "<group>"; };
-		600311821FD6811500D5C36B /* RequestableType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestableType.swift; sourceTree = "<group>"; };
+		600311821FD6811500D5C36B /* ProviderConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderConfiguration.swift; sourceTree = "<group>"; };
 		600311841FD6842F00D5C36B /* Encoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Encoding.swift; sourceTree = "<group>"; };
 		600311861FD68CEA00D5C36B /* ApiProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiProvider.swift; sourceTree = "<group>"; };
 		6039A6931FD6E573002F04D1 /* RequestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestManager.swift; sourceTree = "<group>"; };
@@ -91,7 +91,7 @@
 				1DDC45721FD1959500F21A57 /* Support Files */,
 				6003117E1FD67F1200D5C36B /* HTTPCab.swift */,
 				600311801FD6801100D5C36B /* HTTPCabError.swift */,
-				600311821FD6811500D5C36B /* RequestableType.swift */,
+				600311821FD6811500D5C36B /* ProviderConfiguration.swift */,
 				600311861FD68CEA00D5C36B /* ApiProvider.swift */,
 				606EEFD61FD937550059B4EE /* AnyEncodable.swift */,
 				606EEFD41FD9371C0059B4EE /* Endpoint.swift */,
@@ -242,7 +242,7 @@
 				606EEFD51FD9371C0059B4EE /* Endpoint.swift in Sources */,
 				6039A6941FD6E573002F04D1 /* RequestManager.swift in Sources */,
 				60B562AD1FD812C60043B8D1 /* RequestResult.swift in Sources */,
-				600311831FD6811500D5C36B /* RequestableType.swift in Sources */,
+				600311831FD6811500D5C36B /* ProviderConfiguration.swift in Sources */,
 				600311871FD68CEA00D5C36B /* ApiProvider.swift in Sources */,
 				606EEFD71FD937550059B4EE /* AnyEncodable.swift in Sources */,
 				6003117F1FD67F1200D5C36B /* HTTPCab.swift in Sources */,
