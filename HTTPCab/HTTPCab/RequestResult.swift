@@ -12,7 +12,7 @@ public struct RequestResult {
     public let statusCode: Int
     public let data: Data?
     
-    public func encodeJSONObject<T: Decodable>(_ object: T.Type) throws -> T {
+    public func decodeJSONObject<T: Decodable>(_ object: T.Type) throws -> T {
         guard let data = self.data else {
             throw HTTPCabError.responseError(error: .noData)
         }

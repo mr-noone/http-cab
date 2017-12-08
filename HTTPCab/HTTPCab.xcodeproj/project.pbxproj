@@ -15,7 +15,6 @@
 		600311851FD6842F00D5C36B /* Encoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600311841FD6842F00D5C36B /* Encoding.swift */; };
 		600311871FD68CEA00D5C36B /* ApiProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600311861FD68CEA00D5C36B /* ApiProvider.swift */; };
 		6039A6941FD6E573002F04D1 /* RequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6039A6931FD6E573002F04D1 /* RequestManager.swift */; };
-		603D96781FD81B1800112562 /* DataTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 603D96771FD81B1800112562 /* DataTask.swift */; };
 		606EEFD51FD9371C0059B4EE /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 606EEFD41FD9371C0059B4EE /* Endpoint.swift */; };
 		606EEFD71FD937550059B4EE /* AnyEncodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 606EEFD61FD937550059B4EE /* AnyEncodable.swift */; };
 		60B562AD1FD812C60043B8D1 /* RequestResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B562AC1FD812C60043B8D1 /* RequestResult.swift */; };
@@ -43,7 +42,6 @@
 		600311841FD6842F00D5C36B /* Encoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Encoding.swift; sourceTree = "<group>"; };
 		600311861FD68CEA00D5C36B /* ApiProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiProvider.swift; sourceTree = "<group>"; };
 		6039A6931FD6E573002F04D1 /* RequestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestManager.swift; sourceTree = "<group>"; };
-		603D96771FD81B1800112562 /* DataTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTask.swift; sourceTree = "<group>"; };
 		606EEFD41FD9371C0059B4EE /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		606EEFD61FD937550059B4EE /* AnyEncodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyEncodable.swift; sourceTree = "<group>"; };
 		60B562AC1FD812C60043B8D1 /* RequestResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestResult.swift; sourceTree = "<group>"; };
@@ -100,7 +98,6 @@
 				600311841FD6842F00D5C36B /* Encoding.swift */,
 				6039A6931FD6E573002F04D1 /* RequestManager.swift */,
 				60B562AC1FD812C60043B8D1 /* RequestResult.swift */,
-				603D96771FD81B1800112562 /* DataTask.swift */,
 			);
 			path = HTTPCab;
 			sourceTree = "<group>";
@@ -249,7 +246,6 @@
 				600311871FD68CEA00D5C36B /* ApiProvider.swift in Sources */,
 				606EEFD71FD937550059B4EE /* AnyEncodable.swift in Sources */,
 				6003117F1FD67F1200D5C36B /* HTTPCab.swift in Sources */,
-				603D96781FD81B1800112562 /* DataTask.swift in Sources */,
 				600311811FD6801100D5C36B /* HTTPCabError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

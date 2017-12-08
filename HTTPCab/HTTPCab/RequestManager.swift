@@ -15,11 +15,11 @@ open class RequestManager {
     }()
     
     var session: URLSession
-    let requestsTimeout: DispatchTime
+    let samaphoreTimeout: DispatchTime
     
-    init(urlSessionConfiguration: URLSessionConfiguration = .default, requestsTimeout: DispatchTime = DispatchTime.distantFuture) {
+    init(urlSessionConfiguration: URLSessionConfiguration = .default, semaphoreTimeout: DispatchTime = DispatchTime.distantFuture) {
         self.session = URLSession(configuration: urlSessionConfiguration, delegate: nil, delegateQueue: nil)
-        self.requestsTimeout = requestsTimeout
+        self.samaphoreTimeout = semaphoreTimeout
     }
     
     @discardableResult
@@ -27,13 +27,14 @@ open class RequestManager {
                       parameters: Parameters? = nil,
                       headers: HTTPHeaders? = nil,
                       parametersEncoding: ParametersEncoding = URLEncoding.default,
-                      completion: @escaping (ResponseStatus) -> ()) -> URLSessionDataTask? {
+                      completion: @escaping RequestStatusCompletion) -> URLSessionDataTask? {
         let originalRequest = URLRequest(url: url, method: method, headers: headers)
         let dispatchSemaphore = DispatchSemaphore(value: 0)
         
         do {
             let encodedUrlRequest = try parametersEncoding.encodeUrlRequest(originalRequest, withParameters: parameters)
             let dataTask = session.dataTask(with: encodedUrlRequest) { data, urlResponse, error in
+                dispatchSemaphore.signal()
                 if let error = error {
                     completion(.failure(error: error))
                 }
@@ -42,13 +43,12 @@ open class RequestManager {
                     return
                 }
                 
-                dispatchSemaphore.signal()
                 completion(.success(value: RequestResult(statusCode: httpUrlResponse.statusCode, data: data)))
             }
             
             dataTask.resume()
             
-            _ = dispatchSemaphore.wait(timeout: requestsTimeout)
+            _ = dispatchSemaphore.wait(timeout: samaphoreTimeout)
             return dataTask
         } catch {
             return nil
@@ -56,7 +56,7 @@ open class RequestManager {
     }
     
     @discardableResult
-    open func request(_ urlRequest: URLRequest, completion: @escaping (ResponseStatus) -> ()) -> URLSessionDataTask {
+    open func request(_ urlRequest: URLRequest, completion: @escaping RequestStatusCompletion) -> URLSessionDataTask {
         let dispatchSemaphore = DispatchSemaphore(value: 0)
         
         let dataTask = session.dataTask(with: urlRequest) { (data, urlResponse, error) in
@@ -72,7 +72,7 @@ open class RequestManager {
         
         dataTask.resume()
         
-        _ = dispatchSemaphore.wait(timeout: requestsTimeout)
+        _ = dispatchSemaphore.wait(timeout: samaphoreTimeout)
         return dataTask
     }
 }

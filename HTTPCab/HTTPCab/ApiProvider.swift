@@ -28,7 +28,7 @@ public class ApiProvider<T: RequestableType> {
     }
     
     @discardableResult
-    public func request(_ target: T, completion: @escaping (ResponseStatus) -> ()) -> URLSessionDataTask? {
+    public func request(_ target: T, completion: @escaping RequestStatusCompletion) -> URLSessionDataTask? {
         let endpoint = defaultEndpointForTarget(target)
         do {
             let urlRequest = try endpoint.urlRequest()
@@ -38,7 +38,7 @@ public class ApiProvider<T: RequestableType> {
         }
     }
     
-    private func standartRequest(urlRequest: URLRequest, completion: @escaping (ResponseStatus) -> ()) -> URLSessionDataTask {
+    private func standartRequest(urlRequest: URLRequest, completion: @escaping RequestStatusCompletion) -> URLSessionDataTask {
         return requestManager.request(urlRequest, completion: completion)
     }
 }

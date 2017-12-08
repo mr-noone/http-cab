@@ -20,16 +20,18 @@ public enum Method: String {
     case options = "OPTIONS"
 }
 
+public typealias RequestStatusCompletion = (RequestStatus) -> ()
+
 @discardableResult
 public func request(_ url: URL, method: Method = .get,
                   parameters: Parameters? = nil,
                   headers: HTTPHeaders? = nil,
                   parametersEncoding: ParametersEncoding = URLEncoding.default,
-                  completion: @escaping (ResponseStatus) -> ()) -> URLSessionDataTask? {
+                  completion: @escaping RequestStatusCompletion) -> URLSessionDataTask? {
     return RequestManager.default.request(url, method: method, parameters: parameters, headers: headers, parametersEncoding: parametersEncoding, completion: completion)
 }
 
-public enum ResponseStatus {
+public enum RequestStatus {
     case success(value: RequestResult)
     case failure(error: Error)
 }
