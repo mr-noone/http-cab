@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class ApiProvider<T: ProviderConfiguration> {
+public class RequestConfigurator<T: ProviderConfiguration> {
     
     let requestManager: NetworkManager
     
@@ -32,7 +32,7 @@ public class ApiProvider<T: ProviderConfiguration> {
     }
 }
 
-public extension ApiProvider {
+public extension RequestConfigurator {
     private final func defaultEndpointForTarget(_ target: T) -> Endpoint<T> {
         return Endpoint(url: URL(requestable: target).absoluteString
             , method: target.method, taskType: target.taskType, headers: target.headers)

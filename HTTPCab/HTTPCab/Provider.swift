@@ -9,12 +9,12 @@
 import Foundation
 
 public protocol Provider {
-    associatedtype ApiProviderType: ProviderConfiguration
-    var provider: ApiProvider<ApiProviderType> { get }
+    associatedtype RequestsType: ProviderConfiguration
+    var configurator: RequestConfigurator<RequestsType> { get }
 }
 
 public extension Provider {
-    var provider: ApiProvider<ApiProviderType> {
-        return ApiProvider<ApiProviderType>()
+    var configurator: RequestConfigurator<RequestsType> {
+        return RequestConfigurator<RequestsType>()
     }
 }

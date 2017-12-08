@@ -13,7 +13,7 @@
 		600311811FD6801100D5C36B /* HTTPCabError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600311801FD6801100D5C36B /* HTTPCabError.swift */; };
 		600311831FD6811500D5C36B /* ProviderConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600311821FD6811500D5C36B /* ProviderConfiguration.swift */; };
 		600311851FD6842F00D5C36B /* Encoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600311841FD6842F00D5C36B /* Encoding.swift */; };
-		600311871FD68CEA00D5C36B /* ApiProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600311861FD68CEA00D5C36B /* ApiProvider.swift */; };
+		600311871FD68CEA00D5C36B /* RequestConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600311861FD68CEA00D5C36B /* RequestConfigurator.swift */; };
 		6026A24F1FDAB5DB00009497 /* Provider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6026A24E1FDAB5DB00009497 /* Provider.swift */; };
 		6039A6941FD6E573002F04D1 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6039A6931FD6E573002F04D1 /* NetworkManager.swift */; };
 		606EEFD51FD9371C0059B4EE /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 606EEFD41FD9371C0059B4EE /* Endpoint.swift */; };
@@ -41,7 +41,7 @@
 		600311801FD6801100D5C36B /* HTTPCabError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPCabError.swift; sourceTree = "<group>"; };
 		600311821FD6811500D5C36B /* ProviderConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderConfiguration.swift; sourceTree = "<group>"; };
 		600311841FD6842F00D5C36B /* Encoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Encoding.swift; sourceTree = "<group>"; };
-		600311861FD68CEA00D5C36B /* ApiProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiProvider.swift; sourceTree = "<group>"; };
+		600311861FD68CEA00D5C36B /* RequestConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestConfigurator.swift; sourceTree = "<group>"; };
 		6026A24E1FDAB5DB00009497 /* Provider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Provider.swift; sourceTree = "<group>"; };
 		6039A6931FD6E573002F04D1 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		606EEFD41FD9371C0059B4EE /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
@@ -94,7 +94,7 @@
 				6003117E1FD67F1200D5C36B /* HTTPCab.swift */,
 				600311801FD6801100D5C36B /* HTTPCabError.swift */,
 				600311821FD6811500D5C36B /* ProviderConfiguration.swift */,
-				600311861FD68CEA00D5C36B /* ApiProvider.swift */,
+				600311861FD68CEA00D5C36B /* RequestConfigurator.swift */,
 				6026A24E1FDAB5DB00009497 /* Provider.swift */,
 				606EEFD61FD937550059B4EE /* AnyEncodable.swift */,
 				606EEFD41FD9371C0059B4EE /* Endpoint.swift */,
@@ -246,7 +246,7 @@
 				6039A6941FD6E573002F04D1 /* NetworkManager.swift in Sources */,
 				60B562AD1FD812C60043B8D1 /* RequestResult.swift in Sources */,
 				600311831FD6811500D5C36B /* ProviderConfiguration.swift in Sources */,
-				600311871FD68CEA00D5C36B /* ApiProvider.swift in Sources */,
+				600311871FD68CEA00D5C36B /* RequestConfigurator.swift in Sources */,
 				606EEFD71FD937550059B4EE /* AnyEncodable.swift in Sources */,
 				6003117F1FD67F1200D5C36B /* HTTPCab.swift in Sources */,
 				6026A24F1FDAB5DB00009497 /* Provider.swift in Sources */,

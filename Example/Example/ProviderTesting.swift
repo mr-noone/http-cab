@@ -36,10 +36,10 @@ extension Requests: ProviderConfiguration {
 }
 
 class RequestsProvider: Provider {
-    typealias ApiProviderType = Requests
+    typealias RequestsType = Requests
     
     func request() {
-        provider.request(.getPosts) { (responseStatus) in
+        configurator.request(.getPosts) { (responseStatus) in
             switch responseStatus {
             case .success(value: let result):
                 print(try! result.mapJSON())
