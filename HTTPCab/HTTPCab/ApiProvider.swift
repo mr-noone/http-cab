@@ -8,17 +8,6 @@
 
 import Foundation
 
-public protocol NetworkService {
-    associatedtype ApiProviderType: ProviderConfiguration
-    var provider: ApiProvider<ApiProviderType> { get }
-}
-
-public extension NetworkService {
-    var provider: ApiProvider<ApiProviderType> {
-        return ApiProvider<ApiProviderType>()
-    }
-}
-
 public class ApiProvider<T: ProviderConfiguration> {
     
     let requestManager: NetworkManager

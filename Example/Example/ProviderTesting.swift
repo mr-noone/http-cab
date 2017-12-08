@@ -35,7 +35,7 @@ extension Requests: ProviderConfiguration {
     }
 }
 
-class RequestsProvider: NetworkService {
+class RequestsProvider: Provider {
     typealias ApiProviderType = Requests
     
     func request() {
