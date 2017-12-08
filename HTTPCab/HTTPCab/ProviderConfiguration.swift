@@ -22,6 +22,6 @@ public protocol ProviderConfiguration {
 public enum TaskType {
     case plainRequest
     case requestWithData(Data)
-    case requestWithParametrs(params: Parameters, encoding: ParametersEncoding)
+    case requestWithParameters(params: Parameters, encoding: ParametersEncoding)
     case requestWithEncodableType(Encodable)
 }
