@@ -13,7 +13,7 @@ enum Requests {
     case getPosts
 }
 
-extension Requests: RequestableType {
+extension Requests: ProviderConfiguration {
     var baseURL: URL {
         return URL(string: "http://localhost:3000/")!
     }
@@ -35,11 +35,11 @@ extension Requests: RequestableType {
     }
 }
 
-class RequestsProvider: NetworkService {
-    typealias ApiProviderType = Requests
+class RequestsProvider: Provider {
+    typealias RequestsType = Requests
     
     func request() {
-        provider.request(.getPosts) { (responseStatus) in
+        configurator.request(.getPosts) { (responseStatus) in
             switch responseStatus {
             case .success(value: let result):
                 print(try! result.mapJSON())

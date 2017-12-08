@@ -8,22 +8,11 @@
 
 import Foundation
 
-public protocol NetworkService {
-    associatedtype ApiProviderType: RequestableType
-    var provider: ApiProvider<ApiProviderType> { get }
-}
-
-public extension NetworkService {
-    var provider: ApiProvider<ApiProviderType> {
-        return ApiProvider<ApiProviderType>()
-    }
-}
-
-public class ApiProvider<T: RequestableType> {
+public class RequestConfigurator<T: ProviderConfiguration> {
     
-    let requestManager: RequestManager
+    let requestManager: NetworkManager
     
-    public init(requestManager: RequestManager = RequestManager.default) {
+    public init(requestManager: NetworkManager = NetworkManager.default) {
         self.requestManager = requestManager
     }
     
@@ -43,15 +32,15 @@ public class ApiProvider<T: RequestableType> {
     }
 }
 
-public extension ApiProvider {
-    public final func defaultEndpointForTarget(_ target: T) -> Endpoint<T> {
+public extension RequestConfigurator {
+    private final func defaultEndpointForTarget(_ target: T) -> Endpoint<T> {
         return Endpoint(url: URL(requestable: target).absoluteString
             , method: target.method, taskType: target.taskType, headers: target.headers)
     }
 }
 
 public extension URL {
-    init<T: RequestableType>(requestable: T) {
+    init<T: ProviderConfiguration>(requestable: T) {
         if requestable.path.isEmpty {
             self = requestable.baseURL
         } else {

@@ -40,7 +40,7 @@ extension Endpoint {
             return request
         case .requestWithEncodableType(let encodable):
             return try request.encodeWithEncodable(encodable)
-        case .requestWithParametrs(params: let params, encoding: let encoding):
+        case .requestWithParameters(params: let params, encoding: let encoding):
             return try request.encodeWithParameters(params, andParametersEncoding: encoding)
         }
     }

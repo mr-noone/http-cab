@@ -28,7 +28,7 @@ public func request(_ url: URL, method: Method = .get,
                   headers: HTTPHeaders? = nil,
                   parametersEncoding: ParametersEncoding = URLEncoding.default,
                   completion: @escaping RequestStatusCompletion) -> URLSessionDataTask? {
-    return RequestManager.default.request(url, method: method, parameters: parameters, headers: headers, parametersEncoding: parametersEncoding, completion: completion)
+    return NetworkManager.default.request(url, method: method, parameters: parameters, headers: headers, parametersEncoding: parametersEncoding, completion: completion)
 }
 
 public enum RequestStatus {

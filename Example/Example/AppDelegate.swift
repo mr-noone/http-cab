@@ -15,7 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-      /*
+      
         let url = URL(string: "http://localhost:3000/posts")
         HTTPCab.request(url!, method: .post, parameters: ["author": "John", "title": "Smith"], headers: nil, parametersEncoding: JSONEncoding.default) { (status) in
             switch status {
@@ -26,10 +26,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 print(error.localizedDescription)
             }
         }
- */
-        
+ 
         let provider = RequestsProvider()
-
         provider.request()
         
         return true
