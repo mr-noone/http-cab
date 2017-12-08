@@ -21,9 +21,9 @@ public extension NetworkService {
 
 public class ApiProvider<T: ProviderConfiguration> {
     
-    let requestManager: RequestManager
+    let requestManager: NetworkManager
     
-    public init(requestManager: RequestManager = RequestManager.default) {
+    public init(requestManager: NetworkManager = NetworkManager.default) {
         self.requestManager = requestManager
     }
     
