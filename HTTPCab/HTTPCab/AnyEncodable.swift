@@ -10,7 +10,7 @@ import Foundation
 
 // - Type erasure for Encodable protocol
 
-struct AnyEncodableObject: Encodable {
+struct AnyEncodable: Encodable {
     private let encodable: Encodable
     
     public init(_ encodable: Encodable) {

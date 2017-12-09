@@ -23,7 +23,7 @@ extension Requests: ProviderConfiguration {
     }
     
     var taskType: TaskType {
-        return .requestWithParametrs(params: ["author" : "Max", "title" : "Maximus"], encoding: JSONEncoding.default)
+        return .requestWithParameters(params: ["author" : "Max", "title" : "Maximus"], encoding: JSONEncoding.default)
     }
     
     var headers: HTTPHeaders? {
