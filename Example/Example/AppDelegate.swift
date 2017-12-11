@@ -26,7 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 print(error.localizedDescription)
             }
         }
- 
+        
         let provider = RequestsProvider()
         provider.request()
         

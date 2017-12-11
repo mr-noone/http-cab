@@ -42,6 +42,14 @@ extension Task {
             return try request.encodeWithEncodable(encodable)
         case .requestWithParameters(params: let params, encoding: let encoding):
             return try request.encodeWithParameters(params, andParametersEncoding: encoding)
+        case .requestCombinedParams(urlParams: let urlParams, bodyParams: let bodyParams):
+            var encodedRequest = try request.encodeWithParameters(urlParams, andParametersEncoding: URLEncoding.default)
+            encodedRequest.httpBody = bodyParams
+            return encodedRequest
+        case .requestCombined(urlParams: let urlParams, bodyParams: let bodyParams, bodyParamsEncoding: let bodyEncoding):
+            var encodedRequest = try request.encodeWithParameters(urlParams, andParametersEncoding: URLEncoding.default)
+            encodedRequest.httpBody = try bodyParams.encodeWithEncoding(bodyEncoding)
+            return encodedRequest
         }
     }
 }

@@ -8,8 +8,6 @@
 
 import Foundation
 
-// - Type erasure for Encodable protocol
-
 struct AnyEncodable: Encodable {
     private let encodable: Encodable
     
