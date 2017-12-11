@@ -17,17 +17,17 @@ public class RequestConfigurator<T: ProviderConfiguration> {
     }
     
     @discardableResult
-    public func request(_ configuration: T, completion: @escaping RequestStatusCompletion) -> URLSessionDataTask? {
+    public func request(_ configuration: T, completion: @escaping RequestStatusCompletion) -> DataTask? {
         let task = defaultTaskForConfiguration(configuration)
         do {
             let urlRequest = try task.urlRequest()
-            return standartRequest(urlRequest: urlRequest, completion: completion)
+            return standardRequest(urlRequest: urlRequest, completion: completion)
         } catch {
             return nil
         }
     }
     
-    private func standartRequest(urlRequest: URLRequest, completion: @escaping RequestStatusCompletion) -> URLSessionDataTask {
+    private func standardRequest(urlRequest: URLRequest, completion: @escaping RequestStatusCompletion) -> DataTask {
         return requestManager.request(urlRequest, completion: completion)
     }
 }
@@ -56,8 +56,8 @@ extension URLRequest {
     
     mutating func encodeWithEncodable(_ encodable: Encodable) throws -> URLRequest {
         do {
-            let obj = AnyEncodable(encodable)
-            httpBody = try JSONEncoder().encode(obj)
+            let encodableObject = AnyEncodable(encodable)
+            httpBody = try JSONEncoder().encode(encodableObject)
             return self
         } catch {
             throw HTTPCabError.mappingError(error: .encodableMapping)

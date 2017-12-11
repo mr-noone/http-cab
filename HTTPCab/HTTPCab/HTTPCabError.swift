@@ -10,6 +10,7 @@ import Foundation
 
 public enum ParametersEncodingError {
     case noUrl
+    case urlEncodingError
     case jsonSerializationError(error: Error)
     case pListEncodingError(error: Error)
 }

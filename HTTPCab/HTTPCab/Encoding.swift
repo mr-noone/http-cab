@@ -36,7 +36,7 @@ public struct URLEncoding: ParametersEncoding {
         }
         
         var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false)
-        urlComponents?.queryItems = params.map { URLQueryItem(name: "\($0.key)", value: "\($0.value)") }
+        urlComponents?.queryItems = params.map { URLQueryItem(paramKey: "\($0.key)", paramValue: "\($0.value)") }
         urlRequest.url = urlComponents?.url
         
         urlRequest.setValueForHeaderFieldIfNotConsist(StandardHeaderFieldKey.contentType.rawValue, value: EncodingHeaderValue.urlEncoding.rawValue)
@@ -111,6 +111,19 @@ private extension URLRequest {
     mutating func setValueForHeaderFieldIfNotConsist(_ headerField: String, value: String) {
         if self.value(forHTTPHeaderField: headerField) == nil {
             self.setValue(value, forHTTPHeaderField: headerField)
+        }
+    }
+}
+
+public extension URLQueryItem {
+    public init(paramKey: String, paramValue: Any) {
+        self.init(name: paramKey, value: nil)
+        
+        switch paramValue {
+        case let bool as Bool:
+            self.value = bool ? "1" : "0"
+        default:
+            self.value = "\(paramValue)"
         }
     }
 }
