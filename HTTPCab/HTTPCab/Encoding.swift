@@ -54,10 +54,14 @@ public struct JSONEncoding: ParametersEncoding {
             guard let params = parameters, !params.isEmpty else {
                 return urlRequest
             }
-            let data = try JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)
-            urlRequest.httpBody = data
-            
-            urlRequest.setValueForHeaderFieldIfNotConsist(StandardHeaderFieldKey.contentType.rawValue, value: EncodingHeaderValue.jsonEncoding.rawValue)
+            if JSONSerialization.isValidJSONObject(params) {
+                let data = try JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)
+                urlRequest.httpBody = data
+                
+                urlRequest.setValueForHeaderFieldIfNotConsist(StandardHeaderFieldKey.contentType.rawValue, value: EncodingHeaderValue.jsonEncoding.rawValue)
+            } else {
+                throw HTTPCabError.parametersEncodingError(error: .invalidJSON)
+            }
         } catch {
             throw HTTPCabError.parametersEncodingError(error: .jsonSerializationError(error: error))
         }
@@ -92,7 +96,7 @@ public struct PlistEncoding: ParametersEncoding {
     public func encodeUrlRequest(_ urlRequest: URLRequest, withParameters parameters: Parameters?) throws -> URLRequest {
         var urlRequest = urlRequest
 
-        guard let params = parameters else { return urlRequest }
+        guard let params = parameters, !params.isEmpty else { return urlRequest }
         
         do {
             let data = try PropertyListSerialization.data(fromPropertyList: params, format: pListFormat, options: writeOptions)

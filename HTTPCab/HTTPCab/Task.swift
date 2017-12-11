@@ -42,14 +42,29 @@ extension Task {
             return try request.encodeWithEncodable(encodable)
         case .requestWithParameters(params: let params, encoding: let encoding):
             return try request.encodeWithParameters(params, andParametersEncoding: encoding)
-        case .requestCombinedParams(urlParams: let urlParams, bodyParams: let bodyParams):
+        case .requestCombinedWithData(urlParams: let urlParams, bodyParams: let bodyParams):
             var encodedRequest = try request.encodeWithParameters(urlParams, andParametersEncoding: URLEncoding.default)
             encodedRequest.httpBody = bodyParams
             return encodedRequest
-        case .requestCombined(urlParams: let urlParams, bodyParams: let bodyParams, bodyParamsEncoding: let bodyEncoding):
+        case .requestCombinedWithBodyEncoding(urlParams: let urlParams, body: let body, bodyEncoding: let bodyEncoding):
             var encodedRequest = try request.encodeWithParameters(urlParams, andParametersEncoding: URLEncoding.default)
-            encodedRequest.httpBody = try bodyParams.encodeWithEncoding(bodyEncoding)
+            encodedRequest.httpBody = encodeAnyBody(body: body, encoding: bodyEncoding)
             return encodedRequest
+        }
+    }
+    
+    private func encodeAnyBody(body: Any, encoding: ParametersEncoding) -> Data? {
+        switch body {
+        case let array as Array<Any>:
+            return array.encodeWithEncoding(encoding)
+        case let dictionary as Dictionary<String, Any>:
+            return dictionary.encodeWithEncoding(encoding)
+        case let string as String:
+            return string.data(using: String.Encoding.utf8)
+        case let data as Data:
+            return data
+        default:
+            return nil
         }
     }
 }

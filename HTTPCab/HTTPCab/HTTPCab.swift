@@ -22,6 +22,7 @@ public enum Method: String {
 
 public typealias RequestStatusCompletion = (RequestStatus) -> ()
 public typealias DataTask = URLSessionDataTask
+public typealias FormURLEncoding = URLEncoding
 
 @discardableResult
 public func request(_ url: URL, method: Method = .get,

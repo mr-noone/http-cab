@@ -40,6 +40,16 @@
                ReferencedContainer = "container:HTTPCab.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "60E867E71FDEAA72004D1C53"
+               BuildableName = "HTTPCabIntegrationTests.xctest"
+               BlueprintName = "HTTPCabIntegrationTests"
+               ReferencedContainer = "container:HTTPCab.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
