@@ -35,8 +35,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let provider = RequestsProvider()
         provider.request()
  
-        
-        
         return true
     }
 }
