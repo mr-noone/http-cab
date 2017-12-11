@@ -10,9 +10,13 @@ import Foundation
 
 public enum ParametersEncodingError {
     case noUrl
+    case invalidEncoding
+    case invalidTypeToEncode(type: String)
     case urlEncodingError
+    case invalidJSON
     case jsonSerializationError(error: Error)
     case pListEncodingError(error: Error)
+    case plainTextEncodingError
 }
 
 public enum ResponseError: Error {

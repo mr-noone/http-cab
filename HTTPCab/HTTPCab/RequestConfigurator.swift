@@ -10,10 +10,10 @@ import Foundation
 
 public class RequestConfigurator<T: ProviderConfiguration> {
     
-    let requestManager: NetworkManager
+    let networkManager: NetworkManager
     
-    public init(requestManager: NetworkManager = NetworkManager.default) {
-        self.requestManager = requestManager
+    public init(networkManager: NetworkManager = NetworkManager.default) {
+        self.networkManager = networkManager
     }
     
     @discardableResult
@@ -23,12 +23,13 @@ public class RequestConfigurator<T: ProviderConfiguration> {
             let urlRequest = try task.urlRequest()
             return standardRequest(urlRequest: urlRequest, completion: completion)
         } catch {
+            print(error.localizedDescription)
             return nil
         }
     }
     
     private func standardRequest(urlRequest: URLRequest, completion: @escaping RequestStatusCompletion) -> DataTask {
-        return requestManager.request(urlRequest, completion: completion)
+        return networkManager.request(urlRequest, completion: completion)
     }
 }
 
