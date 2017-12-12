@@ -139,3 +139,35 @@ yourProfileRequestsConfigurator.request(.getUserProfile) { (responseStatus) in
 let configurator = RequestConfigurator<YourProfileRequests>(networkManager: customNetworkManager)
 ```
 
+
+## Encoding
+
+There are 3 main encoding types: `JSONEncoding`, `URLEncoding`, `PlistEncoding`.
+Access:
+
+```swift
+let urlEncoding = URLEncoding.default
+let jsonEncoding = JSONEncoding.default
+
+//Differents mode for PlistEncoding
+let xmlPlistEncoding = PlistEncoding.xmlFormat
+let binaryFormat = PlistEncoding.binaryFormat
+let openStepFormat = PlistEncoding.openStepFormat
+```
+
+
+Also you can encode data manually and pass it to request. For example:
+
+```swift
+// - Array
+let arrayParams = ["someValue1", "someValue2", "someValue3"]
+let arrayParamsJsonEncoded = arrayParams.jsonEncoded()
+let arrayParamsXmlEncoded = arrayParams.plistEncodedWithPlistFormat(.xml) // or .binary, .openSter
+
+// - Dictionary
+let dictParams: [String: Any] = ["someKey1": "someValue1", "someKey2": 792]
+let dictFormUrlEncoded = dictParams.formUrlEncoded()
+let dictParamsJsonEncoded = dictParams.jsonEncoded()
+let dictParamsXmlEncoded.plistEncodedWithPlistFormat(.xml) // or .binary, .openSter
+```
+All of this methods returns `Data?` which you can easily pass to the request as request body parameter. (For example `.requestWithData`)
