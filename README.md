@@ -170,4 +170,4 @@ let dictFormUrlEncoded = dictParams.formUrlEncoded()
 let dictParamsJsonEncoded = dictParams.jsonEncoded()
 let dictParamsXmlEncoded.plistEncodedWithPlistFormat(.xml) // or .binary, .openSter
 ```
-All of this methods returns `Data?` which you can easily pass to the request as request body parameter. (For example `.requestWithData`)
+All of this methods returns `Data?` which you can easily pass to the request as request body parameter. (For example `.requestWithData(:)`)
