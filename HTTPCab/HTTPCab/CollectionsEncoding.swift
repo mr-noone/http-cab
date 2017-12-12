@@ -12,7 +12,6 @@ public typealias PropertyListFormat = PropertyListSerialization.PropertyListForm
 public typealias PropertyListWriteOptions = PropertyListSerialization.WriteOptions
 
 public extension Dictionary where Key == String {
-    
     public func encodeWithEncoding(_ encoding: ParametersEncoding) -> Data? {
         switch encoding {
         case _ as URLEncoding:

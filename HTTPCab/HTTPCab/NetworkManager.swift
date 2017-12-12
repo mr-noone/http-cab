@@ -9,7 +9,6 @@
 import Foundation
 
 open class NetworkManager {
-    
     open static let `default`: NetworkManager = {
         return NetworkManager(urlSessionConfiguration: URLSessionConfiguration.default)
     }()
@@ -52,7 +51,6 @@ open class NetworkManager {
     
     @discardableResult
     open func request(_ urlRequest: URLRequest, completion: @escaping RequestStatusCompletion) -> URLSessionDataTask {
-        
         let dataTask = session.dataTask(with: urlRequest) { (data, urlResponse, error) in
             if let error = error {
                 completion(.failure(error: error))
