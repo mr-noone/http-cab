@@ -9,7 +9,7 @@ HTTPCab - network framework for HTTP requests and REST.
 ###   Requests
 
 
-#### For simple http requests you can use:
+### For simple http requests you can use:
 
 ```swift
 HTTPCab.request(url, method: .post, parameters: ["key1": "value1", "key2": "value2"], headers: ["headerField": "headerValue"], parametersEncoding: JSONEncoding.default) { (status) in
@@ -42,6 +42,7 @@ enum YourProfileRequests {
   // ...
 }
 ```
+
 
 Then you need to specify all data you need for requests:
 
@@ -88,6 +89,7 @@ extension YourProfileRequests: ProviderConfiguration {
   }
 }
 ```
+
 
 For usage you need to specify the `Provider` that will handle this requests and use `configurator` property for making the request:
 
