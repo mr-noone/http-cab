@@ -13,8 +13,8 @@ class ProviderTests: XCTestCase {
     let testUrl = URL(string: "https://apple.com")!
     var testProvider: RequestConfigurator<Requests>!
     
-    let testParams = ["key1" : "value1", "key2" : "value2"]
-
+    let testParams = ["key1": "value1", "key2": "value2"]
+    
     
     var requestsTimeout: TimeInterval {
         return testProvider.networkManager.session.configuration.timeoutIntervalForRequest
@@ -34,9 +34,18 @@ class ProviderTests: XCTestCase {
         super.tearDown()
     }
     
+    func testProviderConfiguratorIsExist() {
+        class TestProvider: Provider {
+            typealias RequestsType = Requests
+        }
+        
+        let provider = TestProvider()
+        XCTAssertNotNil(provider.configurator)
+    }
+    
     func testProviderGetRequest() {
         let responseExpectation = self.expectation(description: "Expected get response from apple.com")
-
+        
         let dataTask = testProvider.request(.getFromApple) { (_) in
             responseExpectation.fulfill()
         }
@@ -103,6 +112,4 @@ class ProviderTests: XCTestCase {
         XCTAssertEqual(dataTask?.originalRequest?.url, urlComponents?.url)
         XCTAssertNotNil(dataTask?.originalRequest?.httpBody)
     }
-    
-    
 }

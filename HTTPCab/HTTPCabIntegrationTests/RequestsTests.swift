@@ -54,7 +54,7 @@ class RequestsTests: XCTestCase {
     
     func testPostRequestWithURL() {
         let responseExpectation = self.expectation(description: "Expected get response from apple.com")
-
+        
         networkManager.request(testUrl, method: .post) { (_) in
             responseExpectation.fulfill()
         }
@@ -64,7 +64,7 @@ class RequestsTests: XCTestCase {
     
     func testPostRequestWithURLRequest() {
         let responseExpectation = self.expectation(description: "Expected get response from apple.com")
-
+        
         let urlRequest = URLRequest(url: testUrl, method: .post)
         
         XCTAssertEqual(urlRequest.httpMethod, HTTPCab.Method.post.rawValue)

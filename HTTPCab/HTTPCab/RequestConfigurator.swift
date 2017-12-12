@@ -17,7 +17,7 @@ public class RequestConfigurator<T: ProviderConfiguration> {
     }
     
     @discardableResult
-    public func request(_ configuration: T, completion: @escaping RequestStatusCompletion) -> DataTask? {
+    public func request(_ configuration: T, completion: @escaping RequestStatusCompletion) -> URLTask? {
         let task = defaultTaskForConfiguration(configuration)
         do {
             let urlRequest = try task.urlRequest()
@@ -52,7 +52,7 @@ public extension URL {
 
 extension URLRequest {
     mutating func encodeWithParameters(_ parameters: Parameters, andParametersEncoding encoding: ParametersEncoding) throws -> URLRequest {
-            return try encoding.encodeUrlRequest(self, withParameters: parameters)
+        return try encoding.encodeUrlRequest(self, withParameters: parameters)
     }
     
     mutating func encodeWithEncodable(_ encodable: Encodable) throws -> URLRequest {

@@ -22,14 +22,15 @@ public enum Method: String {
 
 public typealias RequestStatusCompletion = (RequestStatus) -> ()
 public typealias DataTask = URLSessionDataTask
+public typealias URLTask = URLSessionTask
 public typealias FormURLEncoding = URLEncoding
 
 @discardableResult
 public func request(_ url: URL, method: Method = .get,
-                  parameters: Parameters? = nil,
-                  headers: HTTPHeaders? = nil,
-                  parametersEncoding: ParametersEncoding = URLEncoding.default,
-                  completion: @escaping RequestStatusCompletion) -> DataTask? {
+                    parameters: Parameters? = nil,
+                    headers: HTTPHeaders? = nil,
+                    parametersEncoding: ParametersEncoding = URLEncoding.default,
+                    completion: @escaping RequestStatusCompletion) -> DataTask? {
     return NetworkManager.default.request(url, method: method, parameters: parameters, headers: headers, parametersEncoding: parametersEncoding, completion: completion)
 }
 

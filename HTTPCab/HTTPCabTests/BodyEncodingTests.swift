@@ -12,7 +12,7 @@ import XCTest
 class BodyEncodingTests: XCTestCase {
     
     let testArray = ["Value1", "Value2", "Value3"]
-    let testDictionary = ["Key1" : "Value1", "Key2" : "Value2", "Key3" : "Value3"]
+    let testDictionary = ["Key1": "Value1", "Key2": "Value2", "Key3": "Value3"]
     let testString = "TestString"
     
     func testJSONEncoding() {
@@ -46,7 +46,6 @@ class BodyEncodingTests: XCTestCase {
     func testDictionaryFormURLEncoding() {
         let formUrlEncodedDictionary = testDictionary.formUrlEncoded()
         XCTAssertNotNil(formUrlEncodedDictionary)
-        
         
         if let data = formUrlEncodedDictionary, let encodedString = String(data: data, encoding: String.Encoding.utf8) {
             let expectedEncodedString = (testDictionary.flatMap { "\($0.key)=\($0.value)"} as Array).joined(separator: "&")

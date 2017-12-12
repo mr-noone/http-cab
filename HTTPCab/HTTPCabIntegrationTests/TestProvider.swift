@@ -57,8 +57,8 @@ extension Requests: ProviderConfiguration {
     
     var taskType: TaskType {
         switch self {
-            case .getFromApple,
-                 .postToApple:
+        case .getFromApple,
+             .postToApple:
             return .plainRequest
         case .postToAppleWithData(let data):
             return .requestWithData(data)

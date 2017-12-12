@@ -27,6 +27,7 @@ public struct URLEncoding: ParametersEncoding {
     
     public func encodeUrlRequest(_ urlRequest: URLRequest, withParameters parameters: Parameters?) throws -> URLRequest {
         var urlRequest = urlRequest
+        
         guard let url = urlRequest.url else {
             throw HTTPCabError.parametersEncodingError(error: .noUrl)
         }
@@ -47,9 +48,10 @@ public struct URLEncoding: ParametersEncoding {
 
 public struct JSONEncoding: ParametersEncoding {
     public static let `default` = JSONEncoding()
-
+    
     public func encodeUrlRequest(_ urlRequest: URLRequest, withParameters parameters: Parameters?) throws -> URLRequest {
         var urlRequest = urlRequest
+        
         do {
             guard let params = parameters, !params.isEmpty else {
                 return urlRequest
@@ -71,7 +73,6 @@ public struct JSONEncoding: ParametersEncoding {
 }
 
 public struct PlistEncoding: ParametersEncoding {
-    
     public static var xmlFormat: PlistEncoding {
         return PlistEncoding(pListFormat: .xml)
     }
@@ -95,7 +96,7 @@ public struct PlistEncoding: ParametersEncoding {
     
     public func encodeUrlRequest(_ urlRequest: URLRequest, withParameters parameters: Parameters?) throws -> URLRequest {
         var urlRequest = urlRequest
-
+        
         guard let params = parameters, !params.isEmpty else { return urlRequest }
         
         do {

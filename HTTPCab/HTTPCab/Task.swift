@@ -55,9 +55,9 @@ extension Task {
     
     private func encodeAnyBody(body: Any, encoding: ParametersEncoding) -> Data? {
         switch body {
-        case let array as Array<Any>:
+        case let array as [Any]:
             return array.encodeWithEncoding(encoding)
-        case let dictionary as Dictionary<String, Any>:
+        case let dictionary as [String: Any]:
             return dictionary.encodeWithEncoding(encoding)
         case let string as String:
             return string.data(using: String.Encoding.utf8)
