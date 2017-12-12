@@ -149,7 +149,7 @@ Access:
 let urlEncoding = URLEncoding.default
 let jsonEncoding = JSONEncoding.default
 
-//Differents mode for PlistEncoding
+//Different modes for PlistEncoding
 let xmlPlistEncoding = PlistEncoding.xmlFormat
 let binaryFormat = PlistEncoding.binaryFormat
 let openStepFormat = PlistEncoding.openStepFormat
