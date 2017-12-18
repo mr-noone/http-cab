@@ -171,3 +171,49 @@ let dictParamsJsonEncoded = dictParams.jsonEncoded()
 let dictParamsXmlEncoded.plistEncodedWithPlistFormat(.xml) // or .binary, .openSter
 ```
 All of this methods returns `Data?` which you can easily pass to the request as request body parameter. (For example `.requestWithData(:)`)
+
+
+## RequestResult
+
+Request return an object of type `RequestResult` in success block, which has some useful functional.
+
+```swift
+//...
+  func getUserProfile() -> UserProfile {
+    configurator.request(.getUserProfile) { (responseStatus) in
+      switch responseStatus {
+      case .success(value: let value):
+        // Value - object of type RequestResult
+      case .failure(error: let error):
+        // Handle error here
+      }
+    }
+  }
+ // ...
+```
+
+You can easily transform `RequestResult` to JSON using `toJSON()` instance method:
+
+```swift
+case .success(value: let value):
+  do {
+    let json = try value.toJSON()
+  } catch {
+    //Handle JSON serialization error
+  }
+```
+
+Or you can easily transfrom `RequestResult` to your model object, that comforms to `Decodable` protocol, using `decodeJSONObject(:)` instance method:
+
+```swift
+struct SomeModel: Decodable {
+  //Struct stuff here
+}
+...
+case .success(value: let value):
+  do {
+    let someModelInstance = value.decodeJSONObject(SomeModel.self) //Returns the object of type SomeModel 
+  } catch {
+    //Handle JSON serialization error
+  }
+```
