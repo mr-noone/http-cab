@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             switch status {
             case .success(value: let result):
                 print(result.statusCode)
-                print(try! result.mapJSON())
+                print(try! result.toJSON())
             case .failure(error: let error):
                 print(error.localizedDescription)
             }
