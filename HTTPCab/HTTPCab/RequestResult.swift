@@ -23,7 +23,7 @@ public struct RequestResult {
         }
     }
     
-    public func mapJSON() throws -> Any {
+    public func toJSON() throws -> Any {
         guard let data = self.data else {
             throw HTTPCabError.responseError(error: .noData)
         }

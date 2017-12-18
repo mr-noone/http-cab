@@ -42,7 +42,7 @@ class RequestsProvider: Provider {
         configurator.request(.getPosts) { (responseStatus) in
             switch responseStatus {
             case .success(value: let result):
-                print(try! result.mapJSON())
+                print(try! result.toJSON())
             case .failure(error: let error):
                 print(error)
             }
