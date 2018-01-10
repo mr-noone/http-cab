@@ -9,28 +9,31 @@
 import Foundation
 
 public struct RequestResult {
-    public let statusCode: Int
-    public let data: Data?
-    
-    public func decodeJSONObject<T: Decodable>(_ object: T.Type) throws -> T {
-        guard let data = self.data else {
-            throw HTTPCabError.responseError(error: .noData)
-        }
-        do {
-            return try JSONDecoder().decode(T.self, from: data)
-        } catch {
-            throw HTTPCabError.responseError(error: .jsonSerializationError(error: error))
-        }
+  public var statusCode: Int {
+    return response.statusCode
+  }
+  public let response: HTTPURLResponse
+  public let data: Data?
+  
+  public func decodeJSONObject<T: Decodable>(_ object: T.Type) throws -> T {
+    guard let data = self.data else {
+      throw HTTPCabError.responseError(error: .noData)
     }
-    
-    public func toJSON() throws -> Any {
-        guard let data = self.data else {
-            throw HTTPCabError.responseError(error: .noData)
-        }
-        do {
-            return try JSONSerialization.jsonObject(with: data, options: .allowFragments)
-        } catch {
-            throw HTTPCabError.responseError(error: .jsonSerializationError(error: error))
-        }
+    do {
+      return try JSONDecoder().decode(T.self, from: data)
+    } catch {
+      throw HTTPCabError.responseError(error: .jsonSerializationError(error: error))
     }
+  }
+  
+  public func toJSON() throws -> Any {
+    guard let data = self.data else {
+      throw HTTPCabError.responseError(error: .noData)
+    }
+    do {
+      return try JSONSerialization.jsonObject(with: data, options: .allowFragments)
+    } catch {
+      throw HTTPCabError.responseError(error: .jsonSerializationError(error: error))
+    }
+  }
 }

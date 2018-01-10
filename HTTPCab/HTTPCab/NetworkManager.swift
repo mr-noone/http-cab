@@ -38,7 +38,7 @@ open class NetworkManager {
                     return
                 }
                 
-                completion(.success(value: RequestResult(statusCode: httpUrlResponse.statusCode, data: data)))
+                completion(.success(value: RequestResult(response: httpUrlResponse, data: data)))
             }
             
             dataTask.resume()
@@ -58,7 +58,7 @@ open class NetworkManager {
             
             guard let httpUrlResponse = urlResponse as? HTTPURLResponse else { return }
             
-            completion(.success(value: RequestResult(statusCode: httpUrlResponse.statusCode, data: data)))
+            completion(.success(value: RequestResult(response: httpUrlResponse, data: data)))
         }
         
         dataTask.resume()
