@@ -9,12 +9,12 @@
 import Foundation
 
 public protocol Provider {
-    associatedtype RequestsType: ProviderConfiguration
-    var configurator: RequestConfigurator<RequestsType> { get }
+  associatedtype RequestsType: ProviderConfiguration
+  var configurator: RequestConfigurator<RequestsType> { get }
 }
 
 public extension Provider {
-    var configurator: RequestConfigurator<RequestsType> {
-        return RequestConfigurator<RequestsType>()
-    }
+  var configurator: RequestConfigurator<RequestsType> {
+    return RequestConfigurator<RequestsType>()
+  }
 }

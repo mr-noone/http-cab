@@ -9,60 +9,60 @@
 import Foundation
 
 open class NetworkManager {
-    open static let `default`: NetworkManager = {
-        return NetworkManager(urlSessionConfiguration: URLSessionConfiguration.default)
-    }()
+  open static let `default`: NetworkManager = {
+    return NetworkManager(urlSessionConfiguration: URLSessionConfiguration.default)
+  }()
+  
+  var session: URLSession
+  
+  init(urlSessionConfiguration: URLSessionConfiguration = .default) {
+    self.session = URLSession(configuration: urlSessionConfiguration, delegate: nil, delegateQueue: nil)
+  }
+  
+  @discardableResult
+  open func request(_ url: URL, method: Method = .get,
+                    parameters: Parameters? = nil,
+                    headers: HTTPHeaders? = nil,
+                    parametersEncoding: ParametersEncoding = URLEncoding.default,
+                    completion: @escaping RequestStatusCompletion) -> URLSessionDataTask? {
+    let originalRequest = URLRequest(url: url, method: method, headers: headers)
     
-    var session: URLSession
-    
-    init(urlSessionConfiguration: URLSessionConfiguration = .default) {
-        self.session = URLSession(configuration: urlSessionConfiguration, delegate: nil, delegateQueue: nil)
-    }
-    
-    @discardableResult
-    open func request(_ url: URL, method: Method = .get,
-                      parameters: Parameters? = nil,
-                      headers: HTTPHeaders? = nil,
-                      parametersEncoding: ParametersEncoding = URLEncoding.default,
-                      completion: @escaping RequestStatusCompletion) -> URLSessionDataTask? {
-        let originalRequest = URLRequest(url: url, method: method, headers: headers)
-        
-        do {
-            let encodedUrlRequest = try parametersEncoding.encodeUrlRequest(originalRequest, withParameters: parameters)
-            let dataTask = session.dataTask(with: encodedUrlRequest) { data, urlResponse, error in
-                if let error = error {
-                    completion(.failure(error: error))
-                }
-                
-                guard let httpUrlResponse = urlResponse as? HTTPURLResponse else {
-                    return
-                }
-                
-                completion(.success(value: RequestResult(response: httpUrlResponse, data: data)))
-            }
-            
-            dataTask.resume()
-            
-            return dataTask
-        } catch {
-            return nil
-        }
-    }
-    
-    @discardableResult
-    open func request(_ urlRequest: URLRequest, completion: @escaping RequestStatusCompletion) -> URLSessionDataTask {
-        let dataTask = session.dataTask(with: urlRequest) { (data, urlResponse, error) in
-            if let error = error {
-                completion(.failure(error: error))
-            }
-            
-            guard let httpUrlResponse = urlResponse as? HTTPURLResponse else { return }
-            
-            completion(.success(value: RequestResult(response: httpUrlResponse, data: data)))
+    do {
+      let encodedUrlRequest = try parametersEncoding.encodeUrlRequest(originalRequest, withParameters: parameters)
+      let dataTask = session.dataTask(with: encodedUrlRequest) { data, urlResponse, error in
+        if let error = error {
+          completion(.failure(error: error))
         }
         
-        dataTask.resume()
+        guard let httpUrlResponse = urlResponse as? HTTPURLResponse else {
+          return
+        }
         
-        return dataTask
+        completion(.success(value: RequestResult(response: httpUrlResponse, data: data)))
+      }
+      
+      dataTask.resume()
+      
+      return dataTask
+    } catch {
+      return nil
     }
+  }
+  
+  @discardableResult
+  open func request(_ urlRequest: URLRequest, completion: @escaping RequestStatusCompletion) -> URLSessionDataTask {
+    let dataTask = session.dataTask(with: urlRequest) { (data, urlResponse, error) in
+      if let error = error {
+        completion(.failure(error: error))
+      }
+      
+      guard let httpUrlResponse = urlResponse as? HTTPURLResponse else { return }
+      
+      completion(.success(value: RequestResult(response: httpUrlResponse, data: data)))
+    }
+    
+    dataTask.resume()
+    
+    return dataTask
+  }
 }
