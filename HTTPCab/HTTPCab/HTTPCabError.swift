@@ -36,3 +36,19 @@ public enum HTTPCabError: Error {
   case parametersEncodingError(error: ParametersEncodingError)
   case responseError(error: ResponseError)
 }
+
+public struct HTTPError: Error {
+  public let code: Int
+  public var localizedDescription: String {
+    return HTTPURLResponse.localizedString(forStatusCode: code)
+  }
+  
+  init?(code: Int) {
+    switch code {
+    case 400...499, 500...599:
+      self.code = code
+    default:
+      return nil
+    }
+  }
+}

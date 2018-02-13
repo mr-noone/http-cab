@@ -8,7 +8,17 @@
 
 import Foundation
 
+public protocol NetworkManagerDelegate: class {
+  func handler(for error: Error) -> ((Error) -> Void)?
+}
+
+public extension NetworkManagerDelegate {
+  func handler(for error: Error) -> ((Error) -> Void)? { return nil }
+}
+
 open class NetworkManager {
+  public weak var delegate: NetworkManagerDelegate?
+  
   open static let `default`: NetworkManager = {
     return NetworkManager(urlSessionConfiguration: URLSessionConfiguration.default)
   }()
@@ -29,21 +39,7 @@ open class NetworkManager {
     
     do {
       let encodedUrlRequest = try parametersEncoding.encodeUrlRequest(originalRequest, withParameters: parameters)
-      let dataTask = session.dataTask(with: encodedUrlRequest) { data, urlResponse, error in
-        if let error = error {
-          completion(.failure(error: error))
-        }
-        
-        guard let httpUrlResponse = urlResponse as? HTTPURLResponse else {
-          return
-        }
-        
-        completion(.success(value: RequestResult(response: httpUrlResponse, data: data)))
-      }
-      
-      dataTask.resume()
-      
-      return dataTask
+      return request(encodedUrlRequest, completion: completion)
     } catch {
       return nil
     }
@@ -51,18 +47,23 @@ open class NetworkManager {
   
   @discardableResult
   open func request(_ urlRequest: URLRequest, completion: @escaping RequestStatusCompletion) -> URLSessionDataTask {
-    let dataTask = session.dataTask(with: urlRequest) { (data, urlResponse, error) in
+    let dataTask = session.dataTask(with: urlRequest) { data, response, error in
+      guard let response = response as? HTTPURLResponse else { return }
+      
+      let error = error ?? HTTPError(code: response.statusCode)
       if let error = error {
-        completion(.failure(error: error))
+        if let handler = self.delegate?.handler(for: error) {
+          handler(error)
+        } else {
+          completion(.failure(error: error))
+        }
+      } else {
+        completion(.success(value: RequestResult(response: response, data: data)))
       }
-      
-      guard let httpUrlResponse = urlResponse as? HTTPURLResponse else { return }
-      
-      completion(.success(value: RequestResult(response: httpUrlResponse, data: data)))
     }
     
     dataTask.resume()
-    
     return dataTask
   }
 }
+
