@@ -48,15 +48,27 @@ open class NetworkManager {
   @discardableResult
   open func request(_ urlRequest: URLRequest, completion: @escaping RequestStatusCompletion) -> URLSessionDataTask {
     let dataTask = session.dataTask(with: urlRequest) { data, response, error in
-      guard let response = response as? HTTPURLResponse else { return }
-      
-      let error = error ?? HTTPError(code: response.statusCode)
-      if let error = error {
+      let errorCompletion: (Error) -> Void = { error in
         if let handler = self.delegate?.handler(for: error) {
           handler(error)
         } else {
           completion(.failure(error: error))
         }
+      }
+      
+      if let error = error {
+        errorCompletion(error)
+        return
+      }
+      
+      guard let response = response as? HTTPURLResponse else {
+        errorCompletion(ResponseError.invalidHTTPResponse)
+        return
+      }
+      
+      let error = HTTPError(code: response.statusCode)
+      if let error = error {
+        errorCompletion(error)
       } else {
         completion(.success(value: RequestResult(response: response, data: data)))
       }
@@ -64,6 +76,14 @@ open class NetworkManager {
     
     dataTask.resume()
     return dataTask
+  }
+  
+  public func cancelAllTasks() {
+    session.getAllTasks {
+      for task in $0 {
+        task.cancel()
+      }
+    }
   }
 }
 
