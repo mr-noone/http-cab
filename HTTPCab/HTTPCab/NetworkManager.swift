@@ -51,9 +51,8 @@ open class NetworkManager {
       let errorCompletion: (Error) -> Void = { error in
         if let handler = self.delegate?.handler(for: error) {
           handler(error)
-        } else {
-          completion(.failure(error: error))
         }
+        completion(.failure(error: error))
       }
       
       if let error = error {
