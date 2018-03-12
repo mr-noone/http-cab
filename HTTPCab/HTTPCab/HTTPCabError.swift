@@ -37,16 +37,19 @@ public enum HTTPCabError: Error {
   case responseError(error: ResponseError)
 }
 
-public struct HTTPError: Error {
-  public let code: Int
-  public var localizedDescription: String {
+public class HTTPError: NSError {
+  public enum Domain {
+    static public let HTTPServerErrorDomain = "HTTPServerErrorDomain"
+  }
+  
+  override open var localizedDescription: String {
     return HTTPURLResponse.localizedString(forStatusCode: code)
   }
   
-  init?(code: Int) {
+  convenience init?(code: Int) {
     switch code {
     case 400...499, 500...599:
-      self.code = code
+      self.init(domain: Domain.HTTPServerErrorDomain, code: code, userInfo: nil)
     default:
       return nil
     }
