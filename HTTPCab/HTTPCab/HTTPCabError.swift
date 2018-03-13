@@ -46,10 +46,10 @@ public class HTTPError: NSError {
     return HTTPURLResponse.localizedString(forStatusCode: code)
   }
   
-  convenience init?(code: Int) {
+  convenience init?(code: Int, userInfo: [String: Any]? = nil) {
     switch code {
     case 400...499, 500...599:
-      self.init(domain: Domain.HTTPServerErrorDomain, code: code, userInfo: nil)
+      self.init(domain: Domain.HTTPServerErrorDomain, code: code, userInfo: userInfo)
     default:
       return nil
     }

@@ -65,7 +65,8 @@ open class NetworkManager {
         return
       }
       
-      let error = HTTPError(code: response.statusCode)
+      let userInfo = self.prepareUserInfo(from: data)
+      let error = HTTPError(code: response.statusCode, userInfo: userInfo)
       if let error = error {
         errorCompletion(error)
       } else {
@@ -86,3 +87,10 @@ open class NetworkManager {
   }
 }
 
+private extension NetworkManager {
+  func prepareUserInfo(from body: Data?) -> [String: Any]? {
+    guard let data = body else { return nil }
+    guard let bodyToUserInfo = try? JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] else { return nil }
+    return bodyToUserInfo
+  }
+}
