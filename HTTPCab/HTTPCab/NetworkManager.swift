@@ -92,7 +92,7 @@ private extension NetworkManager {
     guard
       let data = body,
       let bodyToUserInfo = try? JSONSerialization.jsonObject(with: data,
-                                                             options: .mutableContainers) as? [String: Any]
+                                                             options: []) as? [String: Any]
     else { return nil }
     
     return bodyToUserInfo
