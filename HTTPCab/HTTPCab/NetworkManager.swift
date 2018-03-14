@@ -89,8 +89,12 @@ open class NetworkManager {
 
 private extension NetworkManager {
   func prepareUserInfo(from body: Data?) -> [String: Any]? {
-    guard let data = body else { return nil }
-    guard let bodyToUserInfo = try? JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] else { return nil }
+    guard
+      let data = body,
+      let bodyToUserInfo = try? JSONSerialization.jsonObject(with: data,
+                                                             options: .mutableContainers) as? [String: Any]
+    else { return nil }
+    
     return bodyToUserInfo
   }
 }
