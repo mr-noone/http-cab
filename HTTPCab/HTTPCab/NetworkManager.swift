@@ -25,7 +25,7 @@ open class NetworkManager {
   
   var session: URLSession
   
-  init(urlSessionConfiguration: URLSessionConfiguration = .default) {
+  public init(urlSessionConfiguration: URLSessionConfiguration = .default) {
     self.session = URLSession(configuration: urlSessionConfiguration, delegate: nil, delegateQueue: nil)
   }
   
