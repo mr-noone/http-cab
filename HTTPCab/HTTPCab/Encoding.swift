@@ -37,7 +37,17 @@ public struct URLEncoding: ParametersEncoding {
     }
     
     var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false)
-    urlComponents?.queryItems = params.map { URLQueryItem(paramKey: "\($0.key)", paramValue: "\($0.value)") }
+    let charSet = CharacterSet.urlFragmentAllowed.inverted
+    urlComponents?.queryItems = params.map {
+      let key = $0.key.addingPercentEncoding(withAllowedCharacters: charSet) ?? ""
+      let value: Any
+      if let val = $0.value as? String {
+        value = val.addingPercentEncoding(withAllowedCharacters: charSet) ?? ""
+      } else {
+        value = "\($0.value)"
+      }
+      return URLQueryItem(paramKey: key, paramValue: value)
+    }
     urlRequest.url = urlComponents?.url
         
     return urlRequest
