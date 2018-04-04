@@ -12,8 +12,9 @@ public protocol Provider {
   associatedtype RequestType = Request
   var sessionManager: SessionManager { get }
   
-  func dataRequest(_ request: () -> RequestType) -> URLSessionTask
-  func dataRequest(_ request: () -> URLRequest) -> URLSessionTask
+  func dataRequest(_ request: () -> RequestType) -> URLSessionDataTask
+  func dataRequest(_ url: () -> URL) -> URLSessionDataTask
+  func dataRequest(_ request: () -> URLRequest) -> URLSessionDataTask
 }
 
 public extension Provider {
@@ -21,13 +22,22 @@ public extension Provider {
     return SessionManager.default
   }
   
-  func dataRequest(_ request: () -> RequestType) -> URLSessionTask {
+  @discardableResult
+  func dataRequest(_ request: () -> RequestType) -> URLSessionDataTask {
     let task = sessionManager.dataRequest(request() as! Request)
     task.resume()
     return task
   }
   
-  func dataRequest(_ request: () -> URLRequest) -> URLSessionTask {
+  @discardableResult
+  func dataRequest(_ url: () -> URL) -> URLSessionDataTask {
+    let task = sessionManager.dataRequest(url())
+    task.resume()
+    return task
+  }
+  
+  @discardableResult
+  func dataRequest(_ request: () -> URLRequest) -> URLSessionDataTask {
     let task = sessionManager.dataRequest(request())
     task.resume()
     return task

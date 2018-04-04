@@ -26,16 +26,17 @@ final public class BodyJSONEncoder: BodyEncoder {
 }
 
 final public class BodyPlistEncoder: BodyEncoder {
-  public let pListFormat: PropertyListSerialization.PropertyListFormat
-  public let writeOptions: PropertyListSerialization.WriteOptions
+  public let format: PropertyListSerialization.PropertyListFormat
+  public let options: PropertyListSerialization.WriteOptions
   
-  public init(pListFormat: PropertyListSerialization.PropertyListFormat = .xml, writeOptions: PropertyListSerialization.WriteOptions = 0) {
-    self.pListFormat = pListFormat
-    self.writeOptions = writeOptions
+  public init(format: PropertyListSerialization.PropertyListFormat = .xml,
+              options: PropertyListSerialization.WriteOptions = 0) {
+    self.format = format
+    self.options = options
   }
   
   public func encode(_ body: Any?) -> Data? {
     guard let body = body, PropertyListSerialization.propertyList(body, isValidFor: .xml) else { return nil }
-    return try? PropertyListSerialization.data(fromPropertyList: body, format: pListFormat, options: writeOptions)
+    return try? PropertyListSerialization.data(fromPropertyList: body, format: format, options: options)
   }
 }

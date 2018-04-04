@@ -64,11 +64,15 @@ public extension SessionManager {
 }
 
 extension SessionManager {
-  func dataRequest(_ request: Request) -> URLSessionTask {
+  func dataRequest(_ request: Request) -> URLSessionDataTask {
     return dataRequest(URLRequest(request))
   }
   
-  func dataRequest(_ request: URLRequest) -> URLSessionTask {
+  func dataRequest(_ url: URL) -> URLSessionDataTask {
+    return dataRequest(URLRequest(url: url))
+  }
+  
+  func dataRequest(_ request: URLRequest) -> URLSessionDataTask {
     return session.dataTask(with: request).response { [weak self] _, _, error in
       guard let error = error, let _self = self else { return }
       _self.delegate?.sessionManager(_self, handlerFor: error)?(error)

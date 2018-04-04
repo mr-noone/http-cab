@@ -21,7 +21,7 @@ extension URLSessionTask {
   }
 }
 
-public extension URLSessionTask {
+public extension URLSessionDataTask {
   @discardableResult
   func response(_ closure: @escaping (Data?, URLResponse?, Error?) -> Void) -> Self {
     delegate.response(closure)
