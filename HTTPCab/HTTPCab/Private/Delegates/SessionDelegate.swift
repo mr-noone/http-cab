@@ -26,3 +26,9 @@ extension SessionDelegate: URLSessionDataDelegate {
     dataTask.delegate.urlSession(session, dataTask: dataTask, didReceive: data)
   }
 }
+
+extension SessionDelegate: URLSessionDownloadDelegate {
+  func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
+    downloadTask.delegate.urlSession(session, downloadTask: downloadTask, didFinishDownloadingTo: location)
+  }
+}

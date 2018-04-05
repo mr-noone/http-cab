@@ -28,3 +28,11 @@ public extension URLSessionDataTask {
     return self
   }
 }
+
+public extension URLSessionDownloadTask {
+  @discardableResult
+  func response(_ closure: @escaping (URL?, URLResponse?, Error?) -> Void) -> Self {
+    delegate.response(closure)
+    return self
+  }
+}

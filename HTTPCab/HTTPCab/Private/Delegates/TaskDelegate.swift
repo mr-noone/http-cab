@@ -9,8 +9,9 @@
 import Foundation
 
 final class TaskDelegate: NSObject {
-  var response: URLResponse?
   var data: Data?
+  var url: URL?
+  var response: URLResponse?
   var error: Error?
   
   let queue: OperationQueue = {
@@ -26,6 +27,14 @@ extension TaskDelegate {
     queue.addOperation {
       DispatchQueue.main.async {
         closure(self.data, self.response, self.error)
+      }
+    }
+  }
+  
+  func response(_ closure: @escaping (URL?, URLResponse?, Error?) -> Void) {
+    queue.addOperation {
+      DispatchQueue.main.async {
+        closure(self.url, self.response, self.error)
       }
     }
   }
@@ -60,5 +69,11 @@ extension TaskDelegate: URLSessionDataDelegate {
     } else {
       self.data = data
     }
+  }
+}
+
+extension TaskDelegate: URLSessionDownloadDelegate {
+  func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
+    self.url = location
   }
 }
