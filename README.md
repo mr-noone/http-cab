@@ -75,11 +75,9 @@ For usage you need to specify the `Provider` that will handle this requests:
 
 ```swift
 class YourProfileProvider: Provider {
-  typealias RequestsType = ProfileRequests
-  
   func getUser(id: String) {
     dataRequest {
-      .getUserProfile(id: id)
+      ProfileRequests.getUserProfile(id: id)
     }.response { data, response, error in {
       //...
     }
@@ -87,7 +85,7 @@ class YourProfileProvider: Provider {
   
   func updatePhoneNumber(phone: String) {
     dataRequest {
-      .postUserPhoneNumber(phoneNumber: phoneNumber)
+      ProfileRequests.postUserPhoneNumber(phoneNumber: phoneNumber)
     }.response { data, response, error in {
       //...
     }
