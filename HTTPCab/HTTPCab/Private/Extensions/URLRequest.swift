@@ -24,6 +24,7 @@ extension URLRequest {
     
     self.init(url: url)
     httpBody = request.encoder?.encode(request.body)
+    httpBodyStream = request.bodyStream
     allHTTPHeaderFields = request.headers
   }
 }

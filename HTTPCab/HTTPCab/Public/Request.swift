@@ -25,7 +25,14 @@ public protocol Request {
   var path: String { get }
   var method: Method { get }
   var parameters: [String: String]? { get }
+  var bodyStream: InputStream? { get }
   var body: Any? { get }
   var encoder: BodyEncoder? { get }
   var headers: [String: String]? { get }
+}
+
+public extension Request {
+  var bodyStream: InputStream? {
+    return nil
+  }
 }

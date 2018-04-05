@@ -18,6 +18,9 @@ public protocol Provider {
   func downloadRequest(_ request: () -> Request) -> URLSessionDownloadTask
   func downloadRequest(_ url: () -> URL) -> URLSessionDownloadTask
   func downloadRequest(_ request: () -> URLRequest) -> URLSessionDownloadTask
+  
+  func uploadRequest(_ request: () -> Request) -> URLSessionUploadTask
+  func uploadRequest(_ request: () -> URLRequest) -> URLSessionUploadTask
 }
 
 public extension Provider {
@@ -55,6 +58,18 @@ public extension Provider {
   @discardableResult
   func downloadRequest(_ request: () -> URLRequest) -> URLSessionDownloadTask {
     let task = sessionManager.downloadRequest(request())
+    task.resume()
+    return task
+  }
+  
+  @discardableResult
+  func uploadRequest(_ request: () -> Request) -> URLSessionUploadTask {
+    return uploadRequest { URLRequest(request()) }
+  }
+  
+  @discardableResult
+  func uploadRequest(_ request: () -> URLRequest) -> URLSessionUploadTask {
+    let task = sessionManager.uploadRequest(request())
     task.resume()
     return task
   }

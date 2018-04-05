@@ -75,6 +75,12 @@ extension SessionManager {
       self?.handle(error)
     }
   }
+  
+  func uploadRequest(_ streamedRequest: URLRequest) -> URLSessionUploadTask {
+    return session.uploadTask(withStreamedRequest: streamedRequest).response { [weak self] _, _, error in
+      self?.handle(error)
+    }
+  }
 }
 
 private extension SessionManager {
