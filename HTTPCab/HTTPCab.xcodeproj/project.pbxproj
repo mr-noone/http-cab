@@ -25,6 +25,7 @@
 		6499A1512073A20900830BD5 /* Provider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6499A1502073A20900830BD5 /* Provider.swift */; };
 		6499A1562073A51500830BD5 /* BodyJSONEncoderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6499A1552073A51500830BD5 /* BodyJSONEncoderTests.swift */; };
 		6499A1582073A52800830BD5 /* BodyPlistEncoderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6499A1572073A52800830BD5 /* BodyPlistEncoderTests.swift */; };
+		64C8A2B620763590000476E6 /* HTTPStatusCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64C8A2B520763590000476E6 /* HTTPStatusCode.swift */; };
 		64FB32342073BB68002D7ADC /* URLSessionTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64FB32332073BB68002D7ADC /* URLSessionTask.swift */; };
 		64FB32382073BCA9002D7ADC /* HTTPError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64FB32372073BCA9002D7ADC /* HTTPError.swift */; };
 		64FB32672074B5F9002D7ADC /* HTTPErrorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64FB32662074B5F9002D7ADC /* HTTPErrorTests.swift */; };
@@ -62,6 +63,7 @@
 		6499A1502073A20900830BD5 /* Provider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Provider.swift; sourceTree = "<group>"; };
 		6499A1552073A51500830BD5 /* BodyJSONEncoderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyJSONEncoderTests.swift; sourceTree = "<group>"; };
 		6499A1572073A52800830BD5 /* BodyPlistEncoderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyPlistEncoderTests.swift; sourceTree = "<group>"; };
+		64C8A2B520763590000476E6 /* HTTPStatusCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPStatusCode.swift; sourceTree = "<group>"; };
 		64FB32332073BB68002D7ADC /* URLSessionTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionTask.swift; sourceTree = "<group>"; };
 		64FB32372073BCA9002D7ADC /* HTTPError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPError.swift; sourceTree = "<group>"; };
 		64FB32662074B5F9002D7ADC /* HTTPErrorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPErrorTests.swift; sourceTree = "<group>"; };
@@ -187,6 +189,7 @@
 			children = (
 				6499A13F2073956100830BD5 /* BodyEncoder.swift */,
 				64FB32372073BCA9002D7ADC /* HTTPError.swift */,
+				64C8A2B520763590000476E6 /* HTTPStatusCode.swift */,
 				6499A1502073A20900830BD5 /* Provider.swift */,
 				6499A1412073957E00830BD5 /* Request.swift */,
 				6499A14E2073A1CA00830BD5 /* SessionManager.swift */,
@@ -330,6 +333,7 @@
 				6499A14D2073A1AE00830BD5 /* SessionDelegate.swift in Sources */,
 				64FB32382073BCA9002D7ADC /* HTTPError.swift in Sources */,
 				6499A14B2073A15E00830BD5 /* TaskDelegate.swift in Sources */,
+				64C8A2B620763590000476E6 /* HTTPStatusCode.swift in Sources */,
 				64FB32342073BB68002D7ADC /* URLSessionTask.swift in Sources */,
 				6499A144207395B500830BD5 /* URLRequest.swift in Sources */,
 				6499A1402073956100830BD5 /* BodyEncoder.swift in Sources */,
