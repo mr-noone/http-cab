@@ -8,7 +8,7 @@
 
 import Foundation
 
-public enum Method: String {
+public enum HTTPMethod: String {
   case get = "GET"
   case post = "POST"
   case head = "HEAD"
@@ -23,8 +23,8 @@ public enum Method: String {
 public protocol Request {
   var baseURL: String { get }
   var path: String { get }
-  var method: Method { get }
-  var parameters: [String: String]? { get }
+  var httpMethod: HTTPMethod { get }
+  var queryParams: [String: String]? { get }
   var bodyStream: InputStream? { get }
   var body: Any? { get }
   var encoder: BodyEncoder? { get }
@@ -32,7 +32,7 @@ public protocol Request {
 }
 
 public extension Request {
-  var parameters: [String: String]? {
+  var queryParams: [String: String]? {
     return nil
   }
   

@@ -26,7 +26,7 @@ extension TaskDelegate {
   func response(_ closure: @escaping (Data?, URLResponse?, Error?) -> Void) {
     queue.addOperation {
       DispatchQueue.main.async {
-        closure(self.data, self.response, self.error)
+        closure(self.error == nil ? self.data : nil, self.response, self.error)
       }
     }
   }
@@ -34,7 +34,7 @@ extension TaskDelegate {
   func response(_ closure: @escaping (URL?, URLResponse?, Error?) -> Void) {
     queue.addOperation {
       DispatchQueue.main.async {
-        closure(self.url, self.response, self.error)
+        closure(self.error == nil ? self.url : nil, self.response, self.error)
       }
     }
   }

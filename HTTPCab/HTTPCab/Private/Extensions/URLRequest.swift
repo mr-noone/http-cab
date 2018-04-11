@@ -13,7 +13,7 @@ extension URLRequest {
     let url: URL = {
       var components = URLComponents(string: request.baseURL)
       components?.path = request.path
-      components?.percentEncodedQuery = request.parameters?.percentEncodedQuery
+      components?.percentEncodedQuery = request.queryParams?.percentEncodedQuery
       guard
         let url = components?.url
       else {
@@ -23,6 +23,7 @@ extension URLRequest {
     }()
     
     self.init(url: url)
+    httpMethod = request.httpMethod.rawValue
     httpBody = request.encoder?.encode(request.body)
     httpBodyStream = request.bodyStream
     allHTTPHeaderFields = request.headers
