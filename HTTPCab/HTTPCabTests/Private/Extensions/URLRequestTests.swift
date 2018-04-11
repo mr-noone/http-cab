@@ -10,13 +10,9 @@ import XCTest
 @testable import HTTPCab
 
 private class UTRequest: Request {
-  var baseURL: String { return "https://domain.com" }
-  var path: String { return "/path/to" }
-  var method: HTTPCab.Method { return .get }
-  var parameters: [String : String]? { return nil }
-  var body: Any? { return nil }
-  var encoder: BodyEncoder? { return nil }
-  var headers: [String : String]? { return nil }
+  var baseURL: String = "https://domain.com"
+  var path: String = "/path/to"
+  var httpMethod: HTTPMethod = .get
 }
 
 class URLRequestTests: XCTestCase {

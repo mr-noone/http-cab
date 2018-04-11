@@ -9,6 +9,8 @@
 import Foundation
 
 public class HTTPError: NSError {
+  static public let HTTPErrorDescription = "Description"
+  
   public enum Domain {
     static public let HTTPClientErrorDomain = "HTTPClientErrorDomain"
     static public let HTTPServerErrorDomain = "HTTPServerErrorDomain"
@@ -39,10 +41,16 @@ public class HTTPError: NSError {
   }
   
   static func userInfo(from data: Data?) -> [String: Any]? {
-    if let data = data {
-      return (try? JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: Any]) ?? nil
-    } else {
-      return nil
+    guard let data = data else { return nil }
+    
+    do {
+      return try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: Any]
+    } catch {
+      if let message = String(data: data, encoding: .utf8) {
+        return [HTTPErrorDescription: message];
+      } else {
+        return nil
+      }
     }
   }
 }
