@@ -32,7 +32,23 @@ public protocol Request {
 }
 
 public extension Request {
+  var parameters: [String: String]? {
+    return nil
+  }
+  
   var bodyStream: InputStream? {
+    return nil
+  }
+  
+  var body: Any? {
+    return nil
+  }
+  
+  var encoder: BodyEncoder? {
+    return nil
+  }
+  
+  var headers: [String: String]? {
     return nil
   }
 }

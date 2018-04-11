@@ -75,6 +75,8 @@ For usage you need to specify the `Provider` that will handle this requests:
 
 ```swift
 class YourProfileProvider: Provider {
+  let sessionManager: SessionManager = .default
+  
   func getUser(id: String) {
     dataRequest {
       ProfileRequests.getUserProfile(id: id)

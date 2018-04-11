@@ -24,10 +24,6 @@ public protocol Provider {
 }
 
 public extension Provider {
-  var sessionManager: SessionManager {
-    return SessionManager.default
-  }
-  
   @discardableResult
   func dataRequest(_ request: () -> Request) -> URLSessionDataTask {
     return dataRequest { URLRequest(request()) }
