@@ -111,8 +111,19 @@
 			isa = PBXGroup;
 			children = (
 				6499A11320738A2300830BD5 /* HTTPCab.h */,
-				6499A13E2073954600830BD5 /* Public */,
-				6499A12C20738BB500830BD5 /* Private */,
+				6499A13F2073956100830BD5 /* BodyEncoder.swift */,
+				64FB32372073BCA9002D7ADC /* HTTPError.swift */,
+				64C8A2B520763590000476E6 /* HTTPStatusCode.swift */,
+				6499A1502073A20900830BD5 /* Provider.swift */,
+				6499A1412073957E00830BD5 /* Request.swift */,
+				6499A14E2073A1CA00830BD5 /* SessionManager.swift */,
+				6499A14C2073A1AE00830BD5 /* SessionDelegate.swift */,
+				64FB32332073BB68002D7ADC /* URLSessionTask.swift */,
+				6499A14A2073A15E00830BD5 /* TaskDelegate.swift */,
+				6499A12E20738BCB00830BD5 /* CharacterSet.swift */,
+				6499A13A2073909E00830BD5 /* Dictionary.swift */,
+				6499A13420738EA600830BD5 /* String.swift */,
+				6499A143207395B500830BD5 /* URLRequest.swift */,
 				6499A12A20738AAB00830BD5 /* Support Files */,
 			);
 			path = HTTPCab;
@@ -121,8 +132,13 @@
 		6499A11D20738A2300830BD5 /* HTTPCabTests */ = {
 			isa = PBXGroup;
 			children = (
-				6499A1522073A42D00830BD5 /* Public */,
-				6499A13020738BD000830BD5 /* Private */,
+				6499A1552073A51500830BD5 /* BodyJSONEncoderTests.swift */,
+				6499A1572073A52800830BD5 /* BodyPlistEncoderTests.swift */,
+				64FB32662074B5F9002D7ADC /* HTTPErrorTests.swift */,
+				6499A13220738BEB00830BD5 /* CharacterSetTests.swift */,
+				6499A13C207390FC00830BD5 /* DictionaryTests.swift */,
+				6499A13820738F0100830BD5 /* StringTests.swift */,
+				6499A145207395F000830BD5 /* URLRequestTests.swift */,
 				6499A12B20738AB800830BD5 /* Support Files */,
 			);
 			path = HTTPCabTests;
@@ -143,78 +159,6 @@
 				6499A12020738A2300830BD5 /* Info.plist */,
 			);
 			path = "Support Files";
-			sourceTree = "<group>";
-		};
-		6499A12C20738BB500830BD5 /* Private */ = {
-			isa = PBXGroup;
-			children = (
-				6499A1492073A15000830BD5 /* Delegates */,
-				6499A12D20738BC300830BD5 /* Extensions */,
-			);
-			path = Private;
-			sourceTree = "<group>";
-		};
-		6499A12D20738BC300830BD5 /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				6499A12E20738BCB00830BD5 /* CharacterSet.swift */,
-				6499A13A2073909E00830BD5 /* Dictionary.swift */,
-				6499A13420738EA600830BD5 /* String.swift */,
-				6499A143207395B500830BD5 /* URLRequest.swift */,
-			);
-			path = Extensions;
-			sourceTree = "<group>";
-		};
-		6499A13020738BD000830BD5 /* Private */ = {
-			isa = PBXGroup;
-			children = (
-				6499A13120738BD600830BD5 /* Extensions */,
-			);
-			path = Private;
-			sourceTree = "<group>";
-		};
-		6499A13120738BD600830BD5 /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				6499A13220738BEB00830BD5 /* CharacterSetTests.swift */,
-				6499A13C207390FC00830BD5 /* DictionaryTests.swift */,
-				6499A13820738F0100830BD5 /* StringTests.swift */,
-				6499A145207395F000830BD5 /* URLRequestTests.swift */,
-			);
-			path = Extensions;
-			sourceTree = "<group>";
-		};
-		6499A13E2073954600830BD5 /* Public */ = {
-			isa = PBXGroup;
-			children = (
-				6499A13F2073956100830BD5 /* BodyEncoder.swift */,
-				64FB32372073BCA9002D7ADC /* HTTPError.swift */,
-				64C8A2B520763590000476E6 /* HTTPStatusCode.swift */,
-				6499A1502073A20900830BD5 /* Provider.swift */,
-				6499A1412073957E00830BD5 /* Request.swift */,
-				6499A14E2073A1CA00830BD5 /* SessionManager.swift */,
-				64FB32332073BB68002D7ADC /* URLSessionTask.swift */,
-			);
-			path = Public;
-			sourceTree = "<group>";
-		};
-		6499A1492073A15000830BD5 /* Delegates */ = {
-			isa = PBXGroup;
-			children = (
-				6499A14C2073A1AE00830BD5 /* SessionDelegate.swift */,
-				6499A14A2073A15E00830BD5 /* TaskDelegate.swift */,
-			);
-			path = Delegates;
-			sourceTree = "<group>";
-		};
-		6499A1522073A42D00830BD5 /* Public */ = {
-			isa = PBXGroup;
-			children = (
-				6499A1552073A51500830BD5 /* BodyJSONEncoderTests.swift */,
-				6499A1572073A52800830BD5 /* BodyPlistEncoderTests.swift */,
-				64FB32662074B5F9002D7ADC /* HTTPErrorTests.swift */,
-			);
-			path = Public;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
