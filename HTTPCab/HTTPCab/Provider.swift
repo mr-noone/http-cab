@@ -2,19 +2,71 @@
 //  Provider.swift
 //  HTTPCab
 //
-//  Created by Igor Voytovich on 12/8/17.
-//  Copyright © 2017 Graviti Mobail. All rights reserved.
+//  Created by Aleksey Zgurskiy on 03.04.2018.
+//  Copyright © 2018 Graviti Mobail, TOV. All rights reserved.
 //
 
 import Foundation
 
 public protocol Provider {
-  associatedtype RequestsType: ProviderConfiguration
-  var configurator: RequestConfigurator<RequestsType> { get }
+  var sessionManager: SessionManager { get }
+  
+  func dataRequest(_ request: () -> Request) -> URLSessionDataTask
+  func dataRequest(_ url: () -> URL) -> URLSessionDataTask
+  func dataRequest(_ request: () -> URLRequest) -> URLSessionDataTask
+  
+  func downloadRequest(_ request: () -> Request) -> URLSessionDownloadTask
+  func downloadRequest(_ url: () -> URL) -> URLSessionDownloadTask
+  func downloadRequest(_ request: () -> URLRequest) -> URLSessionDownloadTask
+  
+  func uploadRequest(_ request: () -> Request) -> URLSessionUploadTask
+  func uploadRequest(_ request: () -> URLRequest) -> URLSessionUploadTask
 }
 
 public extension Provider {
-  var configurator: RequestConfigurator<RequestsType> {
-    return RequestConfigurator<RequestsType>()
+  @discardableResult
+  func dataRequest(_ request: () -> Request) -> URLSessionDataTask {
+    return dataRequest { URLRequest(request()) }
+  }
+  
+  @discardableResult
+  func dataRequest(_ url: () -> URL) -> URLSessionDataTask {
+    return dataRequest { URLRequest(url: url()) }
+  }
+  
+  @discardableResult
+  func dataRequest(_ request: () -> URLRequest) -> URLSessionDataTask {
+    let task = sessionManager.dataRequest(request())
+    task.resume()
+    return task
+  }
+  
+  @discardableResult
+  func downloadRequest(_ request: () -> Request) -> URLSessionDownloadTask {
+    return downloadRequest { URLRequest(request()) }
+  }
+  
+  @discardableResult
+  func downloadRequest(_ url: () -> URL) -> URLSessionDownloadTask {
+    return downloadRequest { URLRequest(url: url()) }
+  }
+  
+  @discardableResult
+  func downloadRequest(_ request: () -> URLRequest) -> URLSessionDownloadTask {
+    let task = sessionManager.downloadRequest(request())
+    task.resume()
+    return task
+  }
+  
+  @discardableResult
+  func uploadRequest(_ request: () -> Request) -> URLSessionUploadTask {
+    return uploadRequest { URLRequest(request()) }
+  }
+  
+  @discardableResult
+  func uploadRequest(_ request: () -> URLRequest) -> URLSessionUploadTask {
+    let task = sessionManager.uploadRequest(request())
+    task.resume()
+    return task
   }
 }
