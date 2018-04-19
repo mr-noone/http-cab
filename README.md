@@ -111,3 +111,7 @@ class CustomEncoder: BodyEncoder {
   }
 }
 ```
+
+## License
+
+MIT license. See the [LICENSE file](https://github.com/nullgr/http-cab/blob/master/LICENSE) for details.
