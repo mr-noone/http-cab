@@ -29,3 +29,11 @@ extension URLRequest {
     allHTTPHeaderFields = request.headers
   }
 }
+
+public extension URLRequest {
+  init?(url: URL?, httpMethod: String) {
+    guard let url = url else { return nil }
+    self.init(url: url)
+    self.httpMethod = httpMethod
+  }
+}

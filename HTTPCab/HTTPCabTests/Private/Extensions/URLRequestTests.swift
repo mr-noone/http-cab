@@ -19,4 +19,8 @@ class URLRequestTests: XCTestCase {
   func testInitWithRequest() {
     XCTAssertNotNil(URLRequest(UTRequest()))
   }
+  
+  func testInitWithHttpMethod() {
+    XCTAssertNotNil(URLRequest(url: URL(string: "http://127.0.0.1"), httpMethod: "POST"))
+  }
 }
