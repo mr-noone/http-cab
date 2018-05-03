@@ -24,9 +24,13 @@ extension URLRequest {
     
     self.init(url: url)
     httpMethod = request.httpMethod.rawValue
-    httpBody = request.encoder?.encode(request.body)
-    httpBodyStream = request.bodyStream
     allHTTPHeaderFields = request.headers
+    
+    if let body = request.body {
+      httpBody = request.encoder?.encode(body)
+    } else if let bodyStream = request.bodyStream {
+      httpBodyStream = bodyStream
+    }
   }
 }
 

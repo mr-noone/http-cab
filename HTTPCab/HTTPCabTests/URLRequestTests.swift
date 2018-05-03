@@ -13,11 +13,15 @@ private class UTRequest: Request {
   var baseURL: String = "https://domain.com"
   var path: String = "/path/to"
   var httpMethod: HTTPMethod = .get
+  var body: Any? = ["key" : "value"]
+  var encoder: BodyEncoder? = BodyJSONEncoder()
 }
 
 class URLRequestTests: XCTestCase {
   func testInitWithRequest() {
-    XCTAssertNotNil(URLRequest(UTRequest()))
+    let request = URLRequest(UTRequest())
+    XCTAssertNotNil(request)
+    XCTAssertNotNil(request.httpBody)
   }
   
   func testInitWithHttpMethod() {
