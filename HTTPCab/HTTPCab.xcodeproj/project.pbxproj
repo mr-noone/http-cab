@@ -42,6 +42,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		64581A922088AC1300599D62 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = LICENSE; path = ../../../LICENSE; sourceTree = "<group>"; };
+		64581A942088ACC000599D62 /* HTTPCab.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = HTTPCab.podspec; path = ../../../HTTPCab.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		6499A11020738A2300830BD5 /* HTTPCab.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = HTTPCab.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6499A11320738A2300830BD5 /* HTTPCab.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HTTPCab.h; sourceTree = "<group>"; };
 		6499A11420738A2300830BD5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -148,6 +150,8 @@
 			isa = PBXGroup;
 			children = (
 				64FB328E2074E3F4002D7ADC /* README.md */,
+				64581A922088AC1300599D62 /* LICENSE */,
+				64581A942088ACC000599D62 /* HTTPCab.podspec */,
 				6499A11420738A2300830BD5 /* Info.plist */,
 			);
 			path = "Support Files";
