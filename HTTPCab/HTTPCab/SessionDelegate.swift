@@ -15,13 +15,6 @@ final class SessionDelegate: NSObject, URLSessionTaskDelegate {
 }
 
 extension SessionDelegate: URLSessionDataDelegate {
-  func urlSession(_ session: URLSession,
-                  dataTask: URLSessionDataTask,
-                  didReceive response: URLResponse,
-                  completionHandler: @escaping (URLSession.ResponseDisposition) -> Void) {
-    dataTask.delegate.urlSession(session, dataTask: dataTask, didReceive: response, completionHandler: completionHandler)
-  }
-  
   func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive data: Data) {
     dataTask.delegate.urlSession(session, dataTask: dataTask, didReceive: data)
   }

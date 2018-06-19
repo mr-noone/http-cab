@@ -9,24 +9,33 @@
 import Foundation
 
 final class TaskDelegate: NSObject {
-  var data: Data?
-  var url: URL?
-  var response: URLResponse?
-  var error: Error?
+  private var data: Data?
+  private var url: URL?
+  private var error: Error?
+  private weak var task: URLSessionTask?
   
-  let queue: OperationQueue = {
+  private let queue: OperationQueue = {
     let queue = OperationQueue()
     queue.maxConcurrentOperationCount = 1
     queue.isSuspended = true
     return queue
   }()
+  
+  init(task: URLSessionTask) {
+    self.task = task
+  }
+  
+  deinit {
+    guard let url = self.url else { return }
+    try? FileManager.default.removeItem(at: url)
+  }
 }
 
 extension TaskDelegate {
   func response(_ closure: @escaping (Data?, URLResponse?, Error?) -> Void) {
     queue.addOperation {
       DispatchQueue.main.async {
-        closure(self.error == nil ? self.data : nil, self.response, self.error)
+        closure(self.error == nil ? self.data : nil, self.task?.response, self.error)
       }
     }
   }
@@ -34,7 +43,7 @@ extension TaskDelegate {
   func response(_ closure: @escaping (URL?, URLResponse?, Error?) -> Void) {
     queue.addOperation {
       DispatchQueue.main.async {
-        closure(self.error == nil ? self.url : nil, self.response, self.error)
+        closure(self.error == nil ? self.url : nil, self.task?.response, self.error)
       }
     }
   }
@@ -43,7 +52,7 @@ extension TaskDelegate {
 extension TaskDelegate: URLSessionTaskDelegate {
   func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
     if
-      let response = response as? HTTPURLResponse,
+      let response = task.response as? HTTPURLResponse,
       let error = HTTPError(response, data: data) {
       self.error = error
     } else {
@@ -55,14 +64,6 @@ extension TaskDelegate: URLSessionTaskDelegate {
 }
 
 extension TaskDelegate: URLSessionDataDelegate {
-  func urlSession(_ session: URLSession,
-                  dataTask: URLSessionDataTask,
-                  didReceive response: URLResponse,
-                  completionHandler: @escaping (URLSession.ResponseDisposition) -> Void) {
-    self.response = response
-    completionHandler(.allow)
-  }
-  
   func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive data: Data) {
     if let _ = self.data {
       self.data?.append(data)
@@ -74,6 +75,24 @@ extension TaskDelegate: URLSessionDataDelegate {
 
 extension TaskDelegate: URLSessionDownloadDelegate {
   func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
-    self.url = location
+    let fileManager = FileManager.default
+    
+    var fileUrl: URL
+    if #available(iOS 10.0, *), #available(watchOS 3.0, *) {
+      fileUrl = fileManager.temporaryDirectory
+    } else {
+      fileUrl = URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
+    }
+    
+    fileUrl.appendPathComponent(UUID().uuidString)
+    fileUrl.appendPathExtension((downloadTask.response?.suggestedFilename as NSString?)?.pathExtension ?? "")
+    
+    do {
+      try fileManager.copyItem(at: location, to: fileUrl)
+    } catch {
+      self.error = error
+    }
+    
+    url = fileUrl
   }
 }
