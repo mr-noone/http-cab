@@ -12,7 +12,7 @@ final class TaskDelegate: NSObject {
   private var data: Data?
   private var url: URL?
   private var error: Error?
-  private weak var task: URLSessionTask?
+  private var response: URLResponse?
   
   private let queue: OperationQueue = {
     let queue = OperationQueue()
@@ -20,10 +20,6 @@ final class TaskDelegate: NSObject {
     queue.isSuspended = true
     return queue
   }()
-  
-  init(task: URLSessionTask) {
-    self.task = task
-  }
   
   deinit {
     guard let url = self.url else { return }
@@ -35,7 +31,7 @@ extension TaskDelegate {
   func response(_ closure: @escaping (Data?, URLResponse?, Error?) -> Void) {
     queue.addOperation {
       DispatchQueue.main.async {
-        closure(self.error == nil ? self.data : nil, self.task?.response, self.error)
+        closure(self.error == nil ? self.data : nil, self.response, self.error)
       }
     }
   }
@@ -43,7 +39,7 @@ extension TaskDelegate {
   func response(_ closure: @escaping (URL?, URLResponse?, Error?) -> Void) {
     queue.addOperation {
       DispatchQueue.main.async {
-        closure(self.error == nil ? self.url : nil, self.task?.response, self.error)
+        closure(self.error == nil ? self.url : nil, self.response, self.error)
       }
     }
   }
@@ -51,6 +47,7 @@ extension TaskDelegate {
 
 extension TaskDelegate: URLSessionTaskDelegate {
   func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
+    self.response = task.response
     if
       let response = task.response as? HTTPURLResponse,
       let error = HTTPError(response, data: data) {

@@ -13,7 +13,7 @@ private var TaskDelegateKey = "TaskDelegateKey"
 extension URLSessionTask {
   var delegate: TaskDelegate {
     guard let delegate = objc_getAssociatedObject(self, &TaskDelegateKey) as? TaskDelegate else {
-      let delegate = TaskDelegate(task: self)
+      let delegate = TaskDelegate()
       objc_setAssociatedObject(self, &TaskDelegateKey, delegate, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN)
       return delegate
     }
