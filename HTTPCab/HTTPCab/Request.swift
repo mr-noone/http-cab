@@ -29,6 +29,7 @@ public protocol Request {
   var body: Any? { get }
   var encoder: BodyEncoder? { get }
   var headers: [String: String]? { get }
+  var URLRequest: URLRequest { get }
 }
 
 public extension Request {
@@ -50,5 +51,9 @@ public extension Request {
   
   var headers: [String: String]? {
     return nil
+  }
+  
+  var URLRequest: URLRequest {
+    return Foundation.URLRequest(self)
   }
 }
