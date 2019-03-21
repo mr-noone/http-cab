@@ -70,3 +70,40 @@ public struct FormURLEncoder: BodyEncoder {
     }.joined(separator: "&").data(using: .utf8)
   }
 }
+
+public struct MultipartEncoder: BodyEncoder {
+  public typealias MultipartBinary = (key: String, filename: String, data: Data)
+  public typealias MultipartText = (key: String, value: String)
+  
+  private var boundary = "Boundary-\(UUID().uuidString)"
+  public var contentType: String { return "multipart/form-data; boundary=\(boundary)" }
+  
+  public init() {}
+  
+  public func encode(_ body: Any?) -> Data? {
+    guard let body = body as? [Any] else { return nil }
+    return body.compactMap { obj, index in
+      var data = Data()
+      
+      data.append("--\(boundary)\r\n")
+      
+      switch obj {
+      case let aObj as MultipartBinary:
+        data.append("Content-Disposition: form-data; name=\"\(aObj.key)\"; filename=\"\(aObj.filename)\"\r\n\r\n")
+        data.append(aObj.data)
+      case let aObj as MultipartText:
+        data.append("Content-Disposition: form-data; name=\"\(aObj.key)\"\r\n\r\n")
+        data.append(aObj.value)
+      default:
+        return nil
+      }
+      
+      data.append("\r\n")
+      if index == body.count - 1 {
+        data.append("--\(boundary)--")
+      }
+      
+      return data
+    }.joined()
+  }
+}
