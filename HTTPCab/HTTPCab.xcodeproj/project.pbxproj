@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4B2C251F2243D7CC0055C28A /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B2C251E2243D7CB0055C28A /* Data.swift */; };
+		4B2C25212243D7E30055C28A /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B2C25202243D7E30055C28A /* Array.swift */; };
 		6499A11A20738A2300830BD5 /* HTTPCab.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6499A11020738A2300830BD5 /* HTTPCab.framework */; };
 		6499A12120738A2300830BD5 /* HTTPCab.h in Headers */ = {isa = PBXBuildFile; fileRef = 6499A11320738A2300830BD5 /* HTTPCab.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6499A12F20738BCB00830BD5 /* CharacterSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6499A12E20738BCB00830BD5 /* CharacterSet.swift */; };
@@ -42,6 +44,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4B2C251E2243D7CB0055C28A /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
+		4B2C25202243D7E30055C28A /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
 		64581A922088AC1300599D62 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = LICENSE; path = ../../../LICENSE; sourceTree = "<group>"; };
 		64581A942088ACC000599D62 /* HTTPCab.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = HTTPCab.podspec; path = ../../../HTTPCab.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		6499A11020738A2300830BD5 /* HTTPCab.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = HTTPCab.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -125,6 +129,8 @@
 				6499A12E20738BCB00830BD5 /* CharacterSet.swift */,
 				6499A13A2073909E00830BD5 /* Dictionary.swift */,
 				6499A13420738EA600830BD5 /* String.swift */,
+				4B2C251E2243D7CB0055C28A /* Data.swift */,
+				4B2C25202243D7E30055C28A /* Array.swift */,
 				6499A143207395B500830BD5 /* URLRequest.swift */,
 				6499A12A20738AAB00830BD5 /* Support Files */,
 			);
@@ -281,7 +287,9 @@
 				6499A14D2073A1AE00830BD5 /* SessionDelegate.swift in Sources */,
 				64FB32382073BCA9002D7ADC /* HTTPError.swift in Sources */,
 				6499A14B2073A15E00830BD5 /* TaskDelegate.swift in Sources */,
+				4B2C25212243D7E30055C28A /* Array.swift in Sources */,
 				64C8A2B620763590000476E6 /* HTTPStatusCode.swift in Sources */,
+				4B2C251F2243D7CC0055C28A /* Data.swift in Sources */,
 				64FB32342073BB68002D7ADC /* URLSessionTask.swift in Sources */,
 				6499A144207395B500830BD5 /* URLRequest.swift in Sources */,
 				6499A1402073956100830BD5 /* BodyEncoder.swift in Sources */,
@@ -350,7 +358,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 2.0.3;
+				CURRENT_PROJECT_VERSION = 2.1.0;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -413,7 +421,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 2.0.3;
+				CURRENT_PROJECT_VERSION = 2.1.0;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -460,7 +468,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -488,7 +496,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.nullgr.http-cab";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
