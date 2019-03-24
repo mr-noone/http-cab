@@ -11,5 +11,5 @@ Pod::Spec.new do |s|
   
   s.source = { :git => 'https://github.com/nullgr/http-cab.git', :tag => "#{s.version}" }
   s.source_files = 'HTTPCab/HTTPCab/**/*.{swift}'
-  s.swift_version = '4.1'
+  s.swift_version = '4.2'
 end
