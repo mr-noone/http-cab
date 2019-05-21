@@ -47,21 +47,12 @@ extension ProfileRequests: Request {
     }
   }
   
-  var body: Any? {
+  var body: RequestBody? {
     switch self {
     case .getUserProfile:
       return nil
     case .postUserPhoneNumber(phoneNumber: let phoneNumber):
-      return ["phone_number": phoneNumber]
-    }
-  }
-  
-  var encoder: BodyEncoder? {
-    switch self {
-    case .getUserProfile:
-      return nil
-    case .postUserPhoneNumber:
-      return BodyJSONEncoder()
+      return JSONBody(["phone_number" : phoneNumber])
     }
   }
   
@@ -95,23 +86,24 @@ class YourProfileProvider: Provider {
 }
 ```
 
-## Encoding
+## Request body
 
-There are 2 main encoding types:
+There are 4 main body types:
 
-* `BodyJSONEncoder`
-* `BodyPlistEncoder`
+* `JSONBody`
+* `PlistBody`
+* `FormURLBody`
+* `MultipartBody`
 
-You can create a custom encoder by implement `BodyEncoder` protocol:
+You can create a custom body type by implement `RequestBody` protocol:
 
 ```swift
-class CustomEncoder: BodyEncoder {
-  func encode(_ body: Any?) -> Data? {
-    //...
-  }
+struct CustomBody: RequestBody {
+  var contentType: String
+  var bodyData: Data
 }
 ```
 
 ## License
 
-MIT license. See the [LICENSE file](https://github.com/nullgr/http-cab/blob/master/LICENSE) for details.
+MIT license. See the [LICENSE file](https://github.com/mr-noone/http-cab/blob/master/LICENSE) for details.
