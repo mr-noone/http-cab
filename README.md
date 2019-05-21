@@ -106,4 +106,4 @@ struct CustomBody: RequestBody {
 
 ## License
 
-MIT license. See the [LICENSE file](https://github.com/nullgr/http-cab/blob/master/LICENSE) for details.
+MIT license. See the [LICENSE file](https://github.com/mr-noone/http-cab/blob/master/LICENSE) for details.
