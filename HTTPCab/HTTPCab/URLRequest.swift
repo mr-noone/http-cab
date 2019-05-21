@@ -26,11 +26,14 @@ extension URLRequest {
     httpMethod = request.httpMethod.rawValue
     allHTTPHeaderFields = request.headers
     
-    if let body = request.body, let encoder = request.encoder {
-      httpBody = encoder.encode(body)
-      setValue(encoder.contentType, forHTTPHeaderField: "Content-Type")
-    } else if let bodyStream = request.bodyStream {
+    switch (request.body, request.bodyStream) {
+    case (let body?, _):
+      httpBody = body.bodyData
+      setValue(body.contentType, forHTTPHeaderField: "Content-Type")
+    case (_, let bodyStream?):
       httpBodyStream = bodyStream
+    default:
+      break
     }
   }
 }

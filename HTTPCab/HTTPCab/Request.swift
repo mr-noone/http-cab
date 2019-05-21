@@ -26,8 +26,7 @@ public protocol Request {
   var httpMethod: HTTPMethod { get }
   var queryParams: [String: String]? { get }
   var bodyStream: InputStream? { get }
-  var body: Any? { get }
-  var encoder: BodyEncoder? { get }
+  var body: RequestBody? { get }
   var headers: [String: String]? { get }
   var URLRequest: URLRequest { get }
 }
@@ -41,11 +40,7 @@ public extension Request {
     return nil
   }
   
-  var body: Any? {
-    return nil
-  }
-  
-  var encoder: BodyEncoder? {
+  var body: RequestBody? {
     return nil
   }
   
