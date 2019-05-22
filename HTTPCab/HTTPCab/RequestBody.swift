@@ -142,3 +142,13 @@ public struct MultipartBody: RequestBody {
     return self
   }
 }
+
+public struct JSONEncodableBody<T: Encodable>: RequestBody {
+  public let contentType: String = "application/json"
+  public let bodyData: Data
+  
+  public init?(_ body: T, encoder: JSONEncoder = JSONEncoder()) {
+    guard let bodyData = try? encoder.encode(body) else { return nil }
+    self.bodyData = bodyData
+  }
+}
