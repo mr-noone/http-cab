@@ -86,14 +86,15 @@ class YourProfileProvider: Provider {
 }
 ```
 
-## Request body
-
-There are 4 main body types:
+## Request body types
 
 * `JSONBody`
 * `PlistBody`
 * `FormURLBody`
 * `MultipartBody`
+* `JSONEncodableBody`
+* `PlistEncodableBody`
+* `StringBody`
 
 You can create a custom body type by implement `RequestBody` protocol:
 
