@@ -152,3 +152,14 @@ public struct JSONEncodableBody<T: Encodable>: RequestBody {
     self.bodyData = bodyData
   }
 }
+
+public struct PlistEncodableBody<T: Encodable>: RequestBody {
+  public let contentType: String = "application/xml"
+  public let bodyData: Data
+  
+  public init?(_ body: T, encoder: PropertyListEncoder = PropertyListEncoder()) {
+    guard let bodyData = try? encoder.encode(body) else { return nil }
+    self.bodyData = bodyData
+  }
+}
+
