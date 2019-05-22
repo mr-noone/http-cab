@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name = 'HTTPCab'
-  s.version = '3.0.0'
+  s.version = '3.1.1'
   
   s.summary = 'HTTPCab - network framework for HTTP requests and REST.'
   s.homepage = 'https://github.com/mr-noone/http-cab'
