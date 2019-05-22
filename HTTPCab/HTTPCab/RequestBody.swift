@@ -142,3 +142,33 @@ public struct MultipartBody: RequestBody {
     return self
   }
 }
+
+public struct JSONEncodableBody<T: Encodable>: RequestBody {
+  public let contentType: String = "application/json"
+  public let bodyData: Data
+  
+  public init?(_ body: T, encoder: JSONEncoder = JSONEncoder()) {
+    guard let bodyData = try? encoder.encode(body) else { return nil }
+    self.bodyData = bodyData
+  }
+}
+
+public struct PlistEncodableBody<T: Encodable>: RequestBody {
+  public let contentType: String = "application/xml"
+  public let bodyData: Data
+  
+  public init?(_ body: T, encoder: PropertyListEncoder = PropertyListEncoder()) {
+    guard let bodyData = try? encoder.encode(body) else { return nil }
+    self.bodyData = bodyData
+  }
+}
+
+public struct StringBody: RequestBody {
+  public let contentType: String = "text/plain"
+  public let bodyData: Data
+  
+  public init?(_ string: String, encoding: String.Encoding = .utf8) {
+    guard let bodyData = string.data(using: encoding) else { return nil }
+    self.bodyData = bodyData
+  }
+}
