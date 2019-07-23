@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name = 'HTTPCab'
-  s.version = '3.1.1'
+  s.version = '3.1.2'
   
   s.summary = 'HTTPCab - network framework for HTTP requests and REST.'
   s.homepage = 'https://github.com/mr-noone/http-cab'
@@ -11,5 +11,5 @@ Pod::Spec.new do |s|
   
   s.source = { :git => 'https://github.com/mr-noone/http-cab.git', :tag => "#{s.version}" }
   s.source_files = 'HTTPCab/HTTPCab/**/*.{swift}'
-  s.swift_version = '4.2'
+  s.swift_version = '5.0'
 end
