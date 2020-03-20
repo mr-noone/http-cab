@@ -69,4 +69,12 @@ public extension Provider {
     task.resume()
     return task
   }
+  
+  @discardableResult
+  func uploadRequest(_ request: () -> (request: URLRequest, fromFile: URL)) -> URLSessionUploadTask {
+    let info = request()
+    let task = sessionManager.uploadRequest(info.request, fromFile: info.fromFile)
+    task.resume()
+    return task
+  }
 }
