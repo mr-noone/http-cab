@@ -63,7 +63,7 @@ public extension SessionManager {
   }
 }
 
-extension SessionManager {
+public extension SessionManager {
   func dataRequest(_ request: URLRequest) -> URLSessionDataTask {
     return session.dataTask(with: request).response { [weak self] _, _, error in
       self?.handle(error)
