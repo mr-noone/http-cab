@@ -1,5 +1,6 @@
 ## General
 .DS_Store
+.swiftpm
 
 ## Various settings
 *.pbxuser
