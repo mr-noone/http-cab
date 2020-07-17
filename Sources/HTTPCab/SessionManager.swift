@@ -44,6 +44,7 @@ public extension SessionManager {
     session.getTasksWithCompletionHandler(completionHandler)
   }
   
+  @available(OSX 10.11, *)
   @available(iOS 9.0, *)
   func getAllTasks(completionHandler: @escaping ([URLSessionTask]) -> Void) {
     session.getAllTasks(completionHandler: completionHandler)
@@ -57,6 +58,7 @@ public extension SessionManager {
     session.reset(completionHandler: completionHandler)
   }
   
+  @available(OSX 10.11, *)
   @available(iOS 9.0, *)
   func cancelAllTasks() {
     session.getAllTasks { $0.forEach { $0.cancel() } }
