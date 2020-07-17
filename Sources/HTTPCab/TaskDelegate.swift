@@ -75,7 +75,7 @@ extension TaskDelegate: URLSessionDownloadDelegate {
     let fileManager = FileManager.default
     
     var fileUrl: URL
-    if #available(iOS 10.0, *), #available(watchOS 3.0, *) {
+    if #available(OSX 10.12, *), #available(iOS 10.0, *), #available(watchOS 3.0, *) {
       fileUrl = fileManager.temporaryDirectory
     } else {
       fileUrl = URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)

@@ -44,6 +44,7 @@ public extension SessionManager {
     session.getTasksWithCompletionHandler(completionHandler)
   }
   
+  @available(OSX 10.11, *)
   @available(iOS 9.0, *)
   func getAllTasks(completionHandler: @escaping ([URLSessionTask]) -> Void) {
     session.getAllTasks(completionHandler: completionHandler)
@@ -57,13 +58,14 @@ public extension SessionManager {
     session.reset(completionHandler: completionHandler)
   }
   
+  @available(OSX 10.11, *)
   @available(iOS 9.0, *)
   func cancelAllTasks() {
     session.getAllTasks { $0.forEach { $0.cancel() } }
   }
 }
 
-extension SessionManager {
+public extension SessionManager {
   func dataRequest(_ request: URLRequest) -> URLSessionDataTask {
     return session.dataTask(with: request).response { [weak self] _, _, error in
       self?.handle(error)
@@ -78,6 +80,12 @@ extension SessionManager {
   
   func uploadRequest(_ streamedRequest: URLRequest) -> URLSessionUploadTask {
     return session.uploadTask(withStreamedRequest: streamedRequest).response { [weak self] _, _, error in
+      self?.handle(error)
+    }
+  }
+  
+  func uploadRequest(_ request: URLRequest, fromFile url: URL) -> URLSessionUploadTask {
+    return session.uploadTask(with: request, fromFile: url).response { [weak self] _, _, error in
       self?.handle(error)
     }
   }
